@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="437887ee-4aee-48df-a0fb-f4d1cad21c67" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../vue/mock/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/../vue/mock/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vue/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/../vue/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vue/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../vue/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vue/src/views/login/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../vue/src/views/login/index.vue" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="D:/programs/maven/apache-maven-3.6.3" />
+        <option name="userSettingsFile" value="D:\programs\maven\apache-maven-3.6.3\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1p9m3kTMV9DzGeevl2KxLukY5kO" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+  </component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
+  <component name="RunManager" selected="Spring Boot.OurTaskApplication">
+    <configuration name="CodeGenerator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.water76016.ourtask.CodeGenerator" />
+      <module name="our-task" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.water76016.ourtask.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="OurTaskApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="our-task" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.water76016.ourtask.OurTaskApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.CodeGenerator" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="437887ee-4aee-48df-a0fb-f4d1cad21c67" name="Default Changelist" comment="" />
+      <created>1614603482805</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1614603482805</updated>
+      <workItem from="1614603484848" duration="774000" />
+      <workItem from="1614685481284" duration="1621000" />
+      <workItem from="1614773955246" duration="8741000" />
+      <workItem from="1614921851876" duration="311000" />
+      <workItem from="1614931657242" duration="1896000" />
+      <workItem from="1614994412271" duration="1511000" />
+      <workItem from="1615182537390" duration="613000" />
+      <workItem from="1615256526124" duration="2684000" />
+      <workItem from="1615346120241" duration="3847000" />
+      <workItem from="1615474327672" duration="128000" />
+      <workItem from="1615528158469" duration="1668000" />
+      <workItem from="1615782245355" duration="139000" />
+      <workItem from="1615880906590" duration="26000" />
+      <workItem from="1615982095064" duration="702000" />
+      <workItem from="1616043039885" duration="2314000" />
+      <workItem from="1616215293151" duration="3634000" />
+      <workItem from="1616307158332" duration="620000" />
+      <workItem from="1616412880603" duration="35000" />
+      <workItem from="1616815751334" duration="604000" />
+      <workItem from="1617414581669" duration="1246000" />
+      <workItem from="1617719951807" duration="916000" />
+      <workItem from="1617773549793" duration="987000" />
+      <workItem from="1617799104609" duration="633000" />
+      <workItem from="1617951057026" duration="1831000" />
+      <workItem from="1618069727305" duration="11000" />
+      <workItem from="1618196946365" duration="846000" />
+      <workItem from="1618449426499" duration="1043000" />
+      <workItem from="1619189883426" duration="1654000" />
+      <workItem from="1619192273660" duration="82000" />
+      <workItem from="1619594062143" duration="62000" />
+      <workItem from="1622945656806" duration="4049000" />
+      <workItem from="1622988224656" duration="210000" />
+      <workItem from="1623254280874" duration="699000" />
+      <workItem from="1623324580306" duration="15000" />
+      <workItem from="1623984737898" duration="1767000" />
+      <workItem from="1624412015861" duration="47000" />
+      <workItem from="1624504589336" duration="653000" />
+      <workItem from="1624694072604" duration="1588000" />
+      <workItem from="1624778581466" duration="2123000" />
+    </task>
+    <task id="LOCAL-00001" summary="更新代码">
+      <created>1622952469606</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1622952469606</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="更新代码" />
+    <option name="LAST_COMMIT_MESSAGE" value="更新代码" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="574" y="122" key="#com.intellij.ide.util.MemberChooser" timestamp="1617773736255">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="574" y="122" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1617773736255" />
+    <state x="385" y="10" key="CommitChangelistDialog2" timestamp="1622952468360">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="385" y="10" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1622952468360" />
+    <state x="549" y="114" key="FileChooserDialogImpl" timestamp="1624694712877">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="549" y="114" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1624694712877" />
+    <state width="1493" height="232" key="GridCell.Tab.0.bottom" timestamp="1624543918347">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="232" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1624543918347" />
+    <state width="1493" height="232" key="GridCell.Tab.0.center" timestamp="1624543918347">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="232" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1624543918347" />
+    <state width="1493" height="232" key="GridCell.Tab.0.left" timestamp="1624543918347">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="232" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1624543918347" />
+    <state width="1493" height="232" key="GridCell.Tab.0.right" timestamp="1624543918347">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="232" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1624543918347" />
+    <state width="1493" height="232" key="GridCell.Tab.1.bottom" timestamp="1623255923916">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="232" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1623255923916" />
+    <state width="1493" height="232" key="GridCell.Tab.1.center" timestamp="1623255923916">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="232" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1623255923916" />
+    <state width="1493" height="232" key="GridCell.Tab.1.left" timestamp="1623255923916">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="232" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1623255923916" />
+    <state width="1493" height="232" key="GridCell.Tab.1.right" timestamp="1623255923916">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="232" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1623255923916" />
+    <state width="1493" height="275" key="GridCell.Tab.2.bottom" timestamp="1622953281168">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="275" key="GridCell.Tab.2.bottom/0.0.1536.824@0.0.1536.824" timestamp="1622953281168" />
+    <state width="1493" height="275" key="GridCell.Tab.2.center" timestamp="1622953281168">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="275" key="GridCell.Tab.2.center/0.0.1536.824@0.0.1536.824" timestamp="1622953281168" />
+    <state width="1493" height="275" key="GridCell.Tab.2.left" timestamp="1622953281168">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="275" key="GridCell.Tab.2.left/0.0.1536.824@0.0.1536.824" timestamp="1622953281168" />
+    <state width="1493" height="275" key="GridCell.Tab.2.right" timestamp="1622953281168">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="275" key="GridCell.Tab.2.right/0.0.1536.824@0.0.1536.824" timestamp="1622953281168" />
+    <state x="270" y="54" key="SettingsEditor" timestamp="1623254309706">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="270" y="54" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1623254309706" />
+    <state x="361" y="148" key="Vcs.Push.Dialog.v2" timestamp="1622952488943">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="361" y="148" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1622952488943" />
+    <state x="447" y="145" width="642" height="534" key="find.popup" timestamp="1622951644300">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="447" y="145" width="642" height="534" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1622951644300" />
+    <state x="178" y="114" key="new project wizard" timestamp="1619594116937">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="178" y="114" key="new project wizard/0.0.1536.824@0.0.1536.824" timestamp="1619594116937" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/water76016/ourtask/controller/TaskController.java</url>
+          <line>85</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/water76016/ourtask/config/security/jwt/JwtAuthTokenFilter.java</url>
+          <line>44</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/water76016/ourtask/service/impl/TouristServiceImpl.java</url>
+          <line>60</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/water76016/ourtask/config/security/jwt/JwtAuthService.java</url>
+          <line>34</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

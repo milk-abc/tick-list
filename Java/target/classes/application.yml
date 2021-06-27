@@ -1,0 +1,92 @@
+# DataSource Config
+spring:
+  profiles:
+    active: dev
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #数据库连接池Druid配置
+    type: com.alibaba.druid.pool.DruidDataSource
+    #初始化大小，最小或最大
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    # 配置获取连接等待超时的时间
+    maxWait: 60000
+    # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+    timeBetweenEvictionRunsMillis: 60000
+    # 配置一个连接在池中最小生存的时间，单位是毫秒
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    # 打开PSCache, 并且制定每个连接上PSCache的大小
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 20
+    # 配置监控统计拦截的filters,去掉后监控界面sql无法统计，wall用于防火墙
+    filters: stat,wall
+  redis:
+    # Redis服务器地址
+    host: localhost
+    # Redis数据库索引（默认为0）
+    database: 0
+    # Redis服务器连接端口
+    port: 6379
+    # Redis服务器连接密码（默认为空）
+    password:
+    jedis:
+      pool:
+        # 连接池最大连接数（使用负值表示没有限制）
+        max-active: 8
+        # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-wait: -1ms
+        # 连接池中的最大空闲连接
+        max-idle: 8
+        # 连接池中的最小空闲连接
+        min-idle: 0
+    # 连接超时时间（毫秒）
+    timeout: 3000ms
+  mail:
+    host: smtp.163.com
+    # 在使用时，username和password一定要修改为自己的，否则发送邮件功能无法使用，不影响其他功能
+    username: dxylovelq@163.com
+    password:
+    default-encoding: UTF-8
+    protocol: smtp
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
+      mail.smtp.starttls.required: true
+      mail.smtp.socketFactory.port: 465
+      mail.smtp.socketFactory.class: javax.net.ssl.SSLSocketFactory
+      mail.smtp.socketFactory.fallback: false
+# 邮件发件人
+mail:
+  from: dxylovelq@163.com
+
+mybatis-plus:
+  global-config:
+    db-config:
+      # 逻辑已删除值
+      logic-delete-value: 0
+      # 逻辑未删除值
+      logic-not-delete-value: 1
+  mapper-locations: classpath*:/mapper/**Mapper.xml
+# token令牌
+token:
+  # 令牌自定义标识
+  header: Authorization
+  # 令牌秘钥
+  secret: (EMOK:)_$^11244^%$_(IS:)_@@++--(COOL:)_++++_.sds_(GUY:)
+  # 令牌有效期
+  expireTime: 3600000
+
+server:
+  port: 8888
+logging:
+  config: classpath:logback-spring.xml
+# 取消邮件的健康检查机制，不让其报错，又很好地保护了个人的SMTP码泄漏
+management:
+  health:
+    mail:
+      enabled: false
