@@ -46,10 +46,19 @@ module.exports = {
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+        exclude: [resolve("src/assets/icons/svg")],
         loader: "url-loader",
         options: {
           limit: 10000,
           name: utils.assetsPath("img/[name].[hash:7].[ext]")
+        }
+      },
+      {
+        test: /\.svg$/,
+        include: [resolve("src/assets/icons/svg")],
+        loader: "svg-sprite-loader",
+        options: {
+          symbolId: "icon-[name]" // 指定symbolId 不指定则默认为svg文件名
         }
       },
       {
