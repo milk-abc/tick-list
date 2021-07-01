@@ -11,10 +11,12 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
+    "echarts": "^4.9.0",
     "element-ui": "^2.15.2",
     "js-cookie": "^2.2.1",
     "normalize.css": "^8.0.1",
     "path-to-regexp": "^6.2.0",
+    "v-charts": "^1.19.0",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
     "vuex": "^3.6.2"
