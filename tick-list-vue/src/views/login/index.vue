@@ -74,11 +74,15 @@ export default {
         if (valid) {
           const _this = this
           this.$axios.post('/login', this.loginForm).then(res => {
+
             const jwt = res.headers['authorization']
+            const userInfo = res.data.user
+            console.log('userInfo', userInfo)
             _this.$store.commit('SET_TOKEN', jwt)
+            _this.$store.commit("SET_USERINFO", userInfo)
             // 登录之后，给axios统一设置头部token信息
             this.$axios.defaults.headers.common['Authorization'] = localStorage.getItem('token')
-            _this.$router.push('/dashboard')
+            _this.$router.push('/layout')
           })
         } else {
           console.log('error submit!!')
