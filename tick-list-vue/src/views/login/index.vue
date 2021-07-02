@@ -53,8 +53,8 @@ export default {
     //这里存放数据
     return {
       loginForm: {
-        username: '',
-        password: ''
+        username: 'admin',
+        password: '123456'
       },
       loginRules: {
         username: [
