@@ -31,9 +31,14 @@
                   v-model="loginForm.password"
                   placeholder="密码"
                   name="password"
+                  :type="passwordType"
                   tabindex="2"
                   auto-complete="on"
                   @keyup.enter.native="handleLogin" />
+        <span class="show-pwd"
+              @click="showPwd">
+          <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
+        </span>
       </el-form-item>
       <div style="margin-bottom: 30px">
       </div>
@@ -66,9 +71,20 @@ export default {
           { min: 6, max: 15, message: '长度在 3 到 15 个字符', trigger: 'blur' }
         ],
       },
+      passwordType: 'password',
     };
   },
   methods: {
+    showPwd () {
+      if (this.passwordType === 'password') {
+        this.passwordType = ''
+      } else {
+        this.passwordType = 'password'
+      }
+      this.$nextTick(() => {
+        this.$refs.password.focus()
+      });
+    },
     submitForm (formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
