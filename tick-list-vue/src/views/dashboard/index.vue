@@ -1,5 +1,7 @@
 <template>
   <div>
+    <div id="loading">
+    </div>
     <el-card>
       <div slot="header"
            class="clearfix">
@@ -21,14 +23,22 @@
       </div>
     </el-card>
     <el-divider />
+    <div class="checkSelect">
+      <el-checkbox v-model="weekChecked">上周完成清单</el-checkbox>
+      <el-checkbox v-model="monthChecked">上月完成清单</el-checkbox>
+      <el-checkbox v-model="dayChecked">今日完成清单</el-checkbox>
+    </div>
+    <el-divider />
     <el-row>
-      <el-col :span="12">
+      <el-col v-if="weekChecked"
+              :span="12">
         <div>
           <ve-histogram :data="dayData"
                         :settings="chartSettings" />
         </div>
       </el-col>
-      <el-col :span="12">
+      <el-col v-if="monthChecked"
+              :span="12">
         <div>
           <ve-line :data="weekData"
                    :settings="chartSettings" />
@@ -36,7 +46,8 @@
       </el-col>
     </el-row>
     <el-row>
-      <el-col :span="24">
+      <el-col v-if="dayChecked"
+              :span="24">
         <div>
           <ve-waterfall :data="today"
                         :settings="chartSettings"
@@ -71,6 +82,9 @@ export default {
       }
     }
     return {
+      weekChecked: true,
+      monthChecked: true,
+      dayChecked: true,
       dayData: {
         columns: ['date', 'day', 'total'],
         // rows需要初始化为空列表，而不是Null，否则前端会认为这个为空而报错
@@ -98,6 +112,12 @@ export default {
     this.getStatistics()
     this.getToday()
   },
+  mounted () {
+    let loading = document.getElementById('Loading')
+    if (loading != null) {
+      document.body.removeChild(loading)
+    }
+  },
   methods: {
     getDayData () {
       this.$axios.get(`task/countTaskForDay/${this.global.user.id}`).then((res) => {
@@ -124,6 +144,58 @@ export default {
 </script>
 
 <style>
+.loading {
+  width: 200px;
+  height: 200px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  border-top: 10px solid #e74c3c;
+  position: relative;
+  animation: a1 2s linear infinite;
+}
+
+.loading::before,
+.loading::after {
+  content: '';
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  left: 0;
+  top: -10px;
+  box-sizing: border-box;
+  border-radius: 50%;
+}
+.loading::before {
+  border-top: 10px solid #e67e22;
+  transform: rotate(120deg);
+}
+.loading::after {
+  border-top: 10px solid #3498db;
+  transform: rotate(240deg);
+}
+.loading span {
+  position: absolute;
+  width: 200px;
+  height: 200pxs;
+  color: #fff;
+  text-align: center;
+  line-height: 200px;
+  animation: a2 2s linear infinite;
+}
+@keyframes a1 {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes a2 {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+.checkSelect {
+  display: flex;
+  justify-content: center;
+}
 .el-col {
   border-radius: 4px;
   text-align: center;

@@ -7,7 +7,7 @@
       <el-form-item label="清单名称"
                     prop="name">
         <el-input v-model="taskParam.name"
-                  maxlength="6"
+                  maxlength="20"
                   show-word-limit />
       </el-form-item>
       <el-form-item label="清单分类"
