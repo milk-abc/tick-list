@@ -29,32 +29,53 @@
       <el-checkbox v-model="dayChecked">今日完成清单</el-checkbox>
     </div>
     <el-divider />
-    <el-row>
-      <el-col v-if="weekChecked"
-              :span="12">
-        <div>
+    <div>
+      <el-row>
+        <el-col v-if="weekChecked"
+                :span="12">
+          <div class="zoom-parent">
+            <span class="zoom-in-category"
+                  @click="zoomIn('week')">
+              <i class="el-icon-zoom-in"></i>
+            </span>
+          </div>
           <ve-histogram :data="dayData"
                         :settings="chartSettings" />
-        </div>
-      </el-col>
-      <el-col v-if="monthChecked"
-              :span="12">
-        <div>
-          <ve-line :data="weekData"
-                   :settings="chartSettings" />
-        </div>
-      </el-col>
-    </el-row>
-    <el-row>
-      <el-col v-if="dayChecked"
-              :span="24">
-        <div>
-          <ve-waterfall :data="today"
-                        :settings="chartSettings"
-                        :extend="chartExtend" />
-        </div>
-      </el-col>
-    </el-row>
+
+        </el-col>
+
+        <el-col v-if="monthChecked"
+                :span="12">
+          <div class="zoom-parent">
+            <span class="zoom-in-category"
+                  @click="zoomIn('month')">
+              <i class="el-icon-zoom-in"></i>
+            </span>
+            <ve-line :data="weekData"
+                     :settings="chartSettings" />
+          </div>
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col v-if="dayChecked"
+                :span="24">
+          <div class="zoom-parent">
+            <span class="zoom-in-category"
+                  @click="zoomIn('day')">
+              <i class="el-icon-zoom-in"></i>
+            </span>
+            <ve-waterfall :data="today"
+                          :settings="chartSettings"
+                          :extend="chartExtend" />
+          </div>
+        </el-col>
+      </el-row>
+    </div>
+    <zoom-in-category :default-key="zoomInDefaultKey"
+                      v-if="zoomInShow"
+                      :data-list="getZoomInDataList()"
+                      @close="closeZoomIn"
+                      title="完成清单统计"></zoom-in-category>
   </div>
 
 </template>
@@ -62,8 +83,11 @@
 <script>
 import 'echarts/lib/component/title'
 import 'v-charts/lib/style.css'
-
+import ZoomInCategory from './zoomInCategory'
 export default {
+  components: {
+    ZoomInCategory
+  },
   data () {
     this.chartExtend = {
       title: {
@@ -82,6 +106,7 @@ export default {
       }
     }
     return {
+      zoomInDefaultKey: '',
       weekChecked: true,
       monthChecked: true,
       dayChecked: true,
@@ -103,8 +128,35 @@ export default {
         unFinished: null,
         weekFinished: null,
         monthFinished: null
-      }
+      },
+      zoomInShow: false,
     }
+  },
+  computed: {
+    weekOption () {
+      return {
+        type: 've-histogram',
+        data: this.dayData,
+        settings: this.chartSettings,
+        extend: {}
+      }
+    },
+    monthOption () {
+      return {
+        type: 've-line',
+        data: this.weekData,
+        settings: this.chartSettings,
+        extend: {}
+      }
+    },
+    dayOption () {
+      return {
+        type: 've-waterfall',
+        data: this.today,
+        settings: this.chartSettings,
+        extend: this.chartExtend
+      }
+    },
   },
   created () {
     this.getDayData()
@@ -138,12 +190,27 @@ export default {
       this.$axios.get(`task/countTodayForCategory/${this.global.user.id}`).then((res) => {
         this.today.rows = res.data.data
       })
+    },
+    zoomIn (key) {
+      this.zoomInDefaultKey = key
+      this.zoomInShow = true
+    },
+    closeZoomIn () {
+      this.zoomInDefaultKey = ''
+      this.zoomInShow = false
+    },
+    getZoomInDataList () {
+      return [
+        { key: 'week', label: '上周完成清单', options: this.weekOption },
+        { key: 'month', label: '上月完成清单', options: this.monthOption },
+        { key: 'day', label: '今日完成清单', options: this.dayOption },
+      ]
     }
   }
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 .loading {
   width: 200px;
   height: 200px;
@@ -199,5 +266,13 @@ export default {
 .el-col {
   border-radius: 4px;
   text-align: center;
+}
+.zoom-parent {
+  position: relative;
+  .zoom-in-category {
+    position: absolute;
+    right: 5%;
+    z-index: 2;
+  }
 }
 </style>
