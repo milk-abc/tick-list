@@ -11,8 +11,13 @@
       <el-dropdown class="avatar-container"
                    trigger="click">
         <div class="avatar-wrapper">
+          <!-- <el-upload class="avatar-uploader"
+                     :action="$axios.defaults.baseURL+'/upload'"
+                     :show-file-list="false"
+                     :on-success="afterUpload"> -->
           <img :src="avatar"
                class="user-avatar">
+          <!-- </el-upload> -->
           <i class="el-icon-caret-bottom" />
         </div>
         <el-dropdown-menu slot="dropdown"
@@ -62,6 +67,9 @@ export default {
     ])
   },
   methods: {
+    // afterUpload (res) {
+    //   this.avatar = res.url
+    // },
     toggleSideBar () {
       this.$store.dispatch('app/toggleSideBar')
     },
@@ -144,6 +152,19 @@ export default {
           width: 40px;
           height: 40px;
           border-radius: 10px;
+        }
+
+        .fileInput {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          display: block;
+          margin: auto;
+          width: 40px;
+          opacity: 0;
+          background-color: red;
         }
 
         .el-icon-caret-bottom {

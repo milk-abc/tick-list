@@ -1,7 +1,6 @@
 <template>
   <div>
-    <div id="loading">
-    </div>
+    <loading :isShowLoading="isloading"></loading>
     <el-card>
       <div slot="header"
            class="clearfix">
@@ -84,9 +83,11 @@
 import 'echarts/lib/component/title'
 import 'v-charts/lib/style.css'
 import ZoomInCategory from './zoomInCategory'
+import loading from '../../components/animation'
 export default {
   components: {
-    ZoomInCategory
+    ZoomInCategory,
+    loading
   },
   data () {
     this.chartExtend = {
@@ -106,6 +107,7 @@ export default {
       }
     }
     return {
+      isloading: false,
       zoomInDefaultKey: '',
       weekChecked: true,
       monthChecked: true,
@@ -159,18 +161,16 @@ export default {
     },
   },
   created () {
-    this.getDayData()
-    this.getWeekData()
-    this.getStatistics()
-    this.getToday()
+    this.init()
   },
   mounted () {
-    let loading = document.getElementById('Loading')
-    if (loading != null) {
-      document.body.removeChild(loading)
-    }
   },
   methods: {
+    async init () {
+      this.isloading = true;
+      await Promise.all([this.getDayData(), this.getWeekData(), this.getStatistics(), this.getToday()])
+      this.isloading = false;
+    },
     getDayData () {
       this.$axios.get(`task/countTaskForDay/${this.global.user.id}`).then((res) => {
         this.dayData.rows = res.data.data
