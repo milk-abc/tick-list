@@ -161,9 +161,10 @@ export default {
     },
   },
   created () {
-    this.init()
+
   },
   mounted () {
+    this.init()
   },
   methods: {
     async init () {
