@@ -68,7 +68,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 .feedback-el-form {
   margin-top: 100px;
   margin-left: 120px;

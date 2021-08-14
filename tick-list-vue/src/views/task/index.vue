@@ -49,31 +49,33 @@
         </el-row>
       </el-header>
       <el-main>
-        <el-table :data="taskData.records"
-                  stripe
-                  style="width: 100%"
-                  border>
-          <el-table-column prop="name"
-                           width="200"
-                           label="清单名称"
-                           align="center" />
-          <el-table-column prop="description"
-                           label="清单描述"
-                           align="center" />
-          <el-table-column width="200"
-                           label="操作"
-                           align="center">
-            <template slot-scope="scope">
-              <el-button type="text"
-                         size="small"
-                         @click="changeTaskById(scope.row)">编辑修改</el-button>
-              <el-divider direction="vertical" />
-              <el-button type="text"
-                         size="small"
-                         @click="deleteTaskById(scope.row.id)">标记完成</el-button>
-            </template>
-          </el-table-column>
-        </el-table>
+        <div v-if="taskData.records.length>0">
+          <el-table :data="taskData.records"
+                    stripe
+                    style="width: 100%"
+                    border>
+            <el-table-column prop="name"
+                             width="200"
+                             label="清单名称"
+                             align="center" />
+            <el-table-column prop="description"
+                             label="清单描述"
+                             align="center" />
+            <el-table-column width="200"
+                             label="操作"
+                             align="center">
+              <template slot-scope="scope">
+                <el-button type="text"
+                           size="small"
+                           @click="changeTaskById(scope.row)">编辑修改</el-button>
+                <el-divider direction="vertical" />
+                <el-button type="text"
+                           size="small"
+                           @click="deleteTaskById(scope.row.id)">标记完成</el-button>
+              </template>
+            </el-table-column>
+          </el-table>
+        </div>
       </el-main>
     </el-container>
     <el-footer>
@@ -132,6 +134,8 @@ export default {
     }
   },
   created () {
+  },
+  mounted () {
     this.getTaskDataByUserId(1, 5, this.selectCondition)
     this.getUserCategoryParamList()
     this.getLabelParamList()
