@@ -51,6 +51,7 @@
       <el-main>
         <div v-if="taskData.records.length>0">
           <el-table :data="taskData.records"
+                    @row-contextmenu="rowContextmenu"
                     stripe
                     style="width: 100%"
                     border>
@@ -75,6 +76,11 @@
               </template>
             </el-table-column>
           </el-table>
+          <context-button v-if="menuVisible"
+                          @hideMenu="hideMenu"
+                          ref="contextButton"
+                          @handleCountdown="handleCountdown"
+                          @handleTiming="handleTiming"></context-button>
         </div>
       </el-main>
     </el-container>
@@ -112,6 +118,7 @@
 </style>
 
 <script>
+import contextButton from './components/contextButton/index.vue'
 export default {
   data () {
     return {
@@ -130,8 +137,12 @@ export default {
         orders: [],
         searchCount: null,
         pages: null
-      }
+      },
+      menuVisible: false
     }
+  },
+  components: {
+    contextButton
   },
   created () {
   },
@@ -141,6 +152,19 @@ export default {
     this.getLabelParamList()
   },
   methods: {
+    rowContextmenu (row, column, event) {
+      this.menuVisible = !this.menuVisible;//dom节点刚修改
+      event.preventDefault();
+      this.$nextTick(() => {
+        this.$refs.contextButton && this.$refs.contextButton.init(event)
+      });
+    },
+    hideMenu () {
+      this.menuVisible = false
+      document.removeEventListener('click', this.hideMenu)
+    },
+    handleCountdown () { },
+    handleTiming () { },
     getTaskDataByUserId (currentPage, pageSize, selectCondition) {
       this.$axios.post(`task/getPageList/${this.global.user.id}/${currentPage}/${pageSize}`, this.selectCondition)
         .then((res) => {

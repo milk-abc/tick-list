@@ -12,6 +12,8 @@ import "normalize.css/normalize.css"; // A modern alternative to CSS resets
 import "@/styles/index.scss"; // global css
 import "@/icons"; // icon
 import global_ from "@/views/global/index";
+import VueContextMenu from "vue-contextmenu";
+Vue.use(VueContextMenu);
 Vue.prototype.global = global_;
 Vue.use(ElementUI);
 
