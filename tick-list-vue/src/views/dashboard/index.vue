@@ -1,6 +1,5 @@
 <template>
   <div>
-    {{test}}
     <loading :isShowLoading="isloading"></loading>
     <el-card>
       <div slot="header"
