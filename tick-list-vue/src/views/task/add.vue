@@ -2,8 +2,9 @@
   <div class="app-container">
     <template v-for="(item,index) in entireForm">
       <div class="taskForm"
-           :key="item.tid">
-        <el-form :ref="`taskParam${item.tid}`"
+           :key="item.id">
+        <el-form :ref="`taskParam${item.id}`"
+                 :key="item.id"
                  :model="item"
                  :rules="rules"
                  label-width="120px">
@@ -53,9 +54,9 @@
         </el-form>
       </div>
     </template>
-    <div>
+    <div class="footer">
       <el-button type="primary"
-                 @click="addTaskParam('taskParam')">确认</el-button>
+                 @click="addTaskParam()">确认</el-button>
       <el-button @click="clearInput()">重置</el-button>
     </div>
   </div>
@@ -70,7 +71,7 @@ export default {
       entireForm: [],
       tid: 0,
       taskParam: {
-        id: null,
+        id: 0,
         userId: this.global.user.id,
         categoryId: null,
         name: '',
@@ -82,7 +83,7 @@ export default {
           { required: true, message: '请输入清单名称', trigger: 'blur' }
         ],
         categoryId: [
-          { required: true, message: '请勾选清单分类', trigger: 'blur' }
+          { required: true, message: '请勾选清单分类', trigger: 'change' }
         ],
         description: [
           { required: true, message: '请输入清单描述', trigger: 'blur' }
@@ -91,7 +92,7 @@ export default {
     }
   },
   created () {
-    this.entireForm.push({ tkey: this.tid, ...this.taskParam });
+    this.entireForm.push({ ...this.taskParam });
     this.getUserCategoryList()
     this.getLabelParamList()
     if (Object.keys(this.$route.query).length !== 0) {
@@ -101,27 +102,26 @@ export default {
   methods: {
     addForm () {
       this.tid++;
-      this.entireForm.push({ tid: this.tid, ...this.taskParam })
+      this.taskParam.id = this.tid;
+      this.entireForm.push({ ...this.taskParam })
     },
     deleteForm (index) {
       this.entireForm.splice(index, 1);
     },
     addTaskParam () {
       this.entireForm.forEach((item) => {
-        this.$refs[`taskParam${item.tid}`].validate((valid) => {
-          if (valid) {
-            this.$axios.post('task/save', this.item).then((res) => {
-              this.success()
-              this.clearInput()
-              this.$router.push({ path: '/show/task' })
-            })
-          } else {
+        this.$refs[`taskParam${item.id}`][0].validate((valid) => {
+          if (!valid) {
             console.log('error submit!!')
             return false
           }
         })
       })
-
+      this.$axios.post('/task/addList', this.entireForm).then((res) => {
+        this.success()
+        this.clearInput()
+        this.$router.push({ path: '/show/task' })
+      })
     },
     success () {
       this.$message({
@@ -146,10 +146,9 @@ export default {
       })
     },
     clearInput () {
-      this.taskParam.name = ''
-      this.taskParam.categoryId = null
-      this.taskParam.labelList = []
-      this.taskParam.description = ''
+      this.entireForm.forEach((item) => {
+        this.$refs[`taskParam${item.id}`][0].resetFields();
+      })
     }
   }
 }
@@ -159,6 +158,17 @@ export default {
 .app-container {
   .taskForm {
     max-width: 90%;
+    &:nth-child(n + 2) {
+      margin-top: 50px;
+    }
+    &::after {
+      content: '';
+      position: absolute;
+      text-align: center;
+      width: 90%;
+      height: 2px;
+      background-color: #000000;
+    }
     .form-item {
       .input {
         width: 90%;
@@ -173,7 +183,12 @@ export default {
 }
 .el-form-item__content {
   display: flex;
-  margin-left: 0 !important;
+}
+.footer {
+  text-align: right;
+  float: left;
+  font-size: 40px;
+  width: 240px;
 }
 .line {
   text-align: center;
