@@ -3,10 +3,15 @@
     <loading :isShowLoading="isloading"></loading>
     <el-card>
       <div slot="header"
-           class="clearfix">
-        <span>使用统计</span>
+           class="timeBox">
+        <div class="timeDate">
+          <div>{{curDay|filterDate}}</div>
+          <div><span class="bigFont">{{curYear}}年{{curMonth}}月{{curDate}}日</span></div>
+        </div>
+        <div class="time">{{curHour}}:{{curMin}}:{{curSec}}</div>
       </div>
-      <div>
+      <div class="saticsCard">
+        <div class="satics">使用统计</div>
         <el-row>
           <el-col :span="6">{{ statistics.unFinished }}</el-col>
           <el-col :span="6">{{ statistics.weekFinished }}</el-col>
@@ -107,6 +112,7 @@ export default {
       }
     }
     return {
+      curTime: new Date(),
       isloading: false,
       zoomInDefaultKey: '',
       weekChecked: true,
@@ -134,7 +140,47 @@ export default {
       zoomInShow: false,
     }
   },
+  filters: {
+    filterDate (val) {
+      const arr = {
+        '0': '星期天',
+        '1': '星期一',
+        '2': '星期二',
+        '3': '星期三',
+        '4': '星期四',
+        '5': '星期五',
+        '6': '星期六'
+      }
+      return arr[val]
+    }
+  },
   computed: {
+    curDay () {
+      return this.curTime.getDay()
+    },
+    curYear () {
+      return this.curTime.getFullYear()
+    },
+    curMonth () {
+      const month = this.curTime.getMonth()
+      return month + 1 < 10 ? `0${month + 1}` : month + 1
+    },
+    curDate () {
+      const date = this.curTime.getDate()
+      return date < 10 ? `0${date}` : date
+    },
+    curHour () {
+      const hour = this.curTime.getHours()
+      return hour < 10 ? `0${hour}` : hour
+    },
+    curMin () {
+      const min = this.curTime.getMinutes()
+      return min < 10 ? `0${min}` : min
+    },
+    curSec () {
+      const sec = this.curTime.getSeconds()
+      return sec < 10 ? `0${sec}` : sec
+    },
     weekOption () {
       return {
         type: 've-histogram',
@@ -163,7 +209,10 @@ export default {
   created () {
   },
   mounted () {
-    this.init()
+    this.init();
+    setInterval(() => {
+      this.curTime = new Date();
+    }, 1000);
   },
   methods: {
     async init () {
@@ -257,6 +306,36 @@ export default {
 @keyframes a2 {
   to {
     transform: rotate(-360deg);
+  }
+}
+.timeBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .timeDate {
+    flex: 0 1 160px;
+    padding: 10px 5px;
+    background-color: rgb(54, 203, 214);
+    color: #fff;
+    .bigFont {
+      font-size: 20px;
+    }
+  }
+  .time {
+    flex: 0 1 160px;
+    color: rgb(54, 203, 214);
+    border: 1px solid #ccc;
+    font-size: 35px;
+    font-weight: bold;
+    padding: 9.5px 5px;
+  }
+}
+.saticsCard {
+  position: relative;
+  .satics {
+    position: absolute;
+    top: 20%;
+    font-size: 18px;
   }
 }
 .checkSelect {
