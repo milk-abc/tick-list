@@ -14,7 +14,6 @@ export default {
     init (event) {
       let menu = document.querySelector('#contextmenu')
       let cha = document.body.clientHeight - event.clientY
-      console.log(document.body.clientHeight, event.clientY, cha)
       if (cha < 120) {
         menu.style.top = event.clientY - 120 + 'px'
       } else {

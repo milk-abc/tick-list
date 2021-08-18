@@ -106,6 +106,16 @@
         </el-col>
       </el-row>
     </el-footer>
+    <el-card v-if="isCount">
+      <div slot="header"
+           class="clearfix">
+        <el-button type="text"
+                   @click="cancelTime">x</el-button>
+      </div>
+      <div>
+        <span>{{minute}}:{{second}}</span>
+      </div>
+    </el-card>
   </div>
 </template>
 
@@ -138,20 +148,43 @@ export default {
         searchCount: null,
         pages: null
       },
-      menuVisible: false
+      countDownTime: 1500,
+      menuVisible: false,
+      isCount: false,
+      minute: '',
+      second: '',
+      timer: null,
     }
   },
   components: {
     contextButton
   },
   created () {
+
   },
   mounted () {
-    this.getTaskDataByUserId(1, 5, this.selectCondition)
-    this.getUserCategoryParamList()
-    this.getLabelParamList()
+    this.init()
+    let endTime = localStorage.getItem('endTime');
+    if (endTime) {
+      this.countTime(endTime);
+      this.isCount = true;
+    }
+  },
+  beforeDestroy () {
+    clearTimeout(this.timer)
   },
   methods: {
+    async init () {
+      await Promise.all([this.getTaskDataByUserId(1, 5, this.selectCondition), this.getUserCategoryParamList(), this.getLabelParamList()])
+    },
+    minuteCompute () {
+      let curmin = parseInt(this.countDownTime / 60)
+      this.minute = curmin < 10 ? `0${curmin}` : curmin
+    },
+    secondCompute () {
+      let cursec = parseInt(this.countDownTime % 60)
+      this.second = cursec < 10 ? `0${cursec}` : cursec
+    },
     rowContextmenu (row, column, event) {
       this.menuVisible = !this.menuVisible;//dom节点刚修改
       event.preventDefault();
@@ -163,8 +196,36 @@ export default {
       this.menuVisible = false
       document.removeEventListener('click', this.hideMenu)
     },
-    handleCountdown () { },
+    handleCountdown () {
+      this.isCount = true;
+      let endTime = (new Date()).getTime() + 1500000;
+      localStorage.setItem('endTime', JSON.stringify(endTime));
+      this.countTime(endTime);
+    },
+    countTime (endTime) {
+      this.countDownTime = Math.ceil((endTime - (new Date()).getTime()) / 1000)
+      this.minuteCompute();
+      this.secondCompute();
+      this.timer = setTimeout(() => {
+        this.countDownTime--;
+        console.log(this.countDownTime)
+        if (this.countDownTime < 1) {
+          this.countDownTime = 1500;
+          localStorage.removeItem('endTime')
+          clearTimeout(this.timer);
+          this.isCount = false;
+        } else {
+          this.countTime(endTime)
+        }
+      }, 1000)
+    },
     handleTiming () { },
+    cancelTime () {
+      clearTimeout(this.timer);
+      localStorage.removeItem('endTime');
+      this.countDownTime = 1500;
+      this.isCount = false;
+    },
     getTaskDataByUserId (currentPage, pageSize, selectCondition) {
       this.$axios.post(`task/getPageList/${this.global.user.id}/${currentPage}/${pageSize}`, this.selectCondition)
         .then((res) => {
