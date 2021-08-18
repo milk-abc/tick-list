@@ -106,16 +106,18 @@
         </el-col>
       </el-row>
     </el-footer>
-    <el-card v-if="isCount">
-      <div slot="header"
-           class="clearfix">
-        <el-button type="text"
-                   @click="cancelTime">x</el-button>
+    <div class="timeCard"
+         v-if="isCount">
+      <el-button type="text"
+                 @click="cancelTime"
+                 class="btn"
+                 icon="el-icon-close"></el-button>
+      <div class="text">
+        <span class="time">{{minute}}:{{second}}</span>
+        <span class="taskname">{{taskName}}</span>
       </div>
-      <div>
-        <span>{{minute}}:{{second}}</span>
-      </div>
-    </el-card>
+
+    </div>
   </div>
 </template>
 
@@ -154,6 +156,7 @@ export default {
       minute: '',
       second: '',
       timer: null,
+      taskName: ''
     }
   },
   components: {
@@ -189,14 +192,15 @@ export default {
       this.menuVisible = !this.menuVisible;//dom节点刚修改
       event.preventDefault();
       this.$nextTick(() => {
-        this.$refs.contextButton && this.$refs.contextButton.init(event)
+        this.$refs.contextButton && this.$refs.contextButton.init(row, column, event)
       });
     },
     hideMenu () {
       this.menuVisible = false
       document.removeEventListener('click', this.hideMenu)
     },
-    handleCountdown () {
+    handleCountdown (taskName) {
+      this.taskName = taskName;
       this.isCount = true;
       let endTime = (new Date()).getTime() + 1500000;
       localStorage.setItem('endTime', JSON.stringify(endTime));
@@ -277,7 +281,36 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+.timeCard {
+  z-index: 1;
+  position: relative;
+  width: 200px;
+  height: 100px;
+  border-radius: 2px;
+  box-shadow: 2px 2px 5px #333333;
+  background: #ffff;
+  .btn {
+    display: block;
+    position: absolute;
+    top: -10px;
+    right: 10px;
+    width: 10px;
+    height: 10px;
+    color: rgb(201, 197, 197);
+  }
+  .text {
+    font-size: 30px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    .taskname {
+      display: block;
+      text-align: center;
+    }
+  }
+}
 .el-col {
   border-radius: 4px;
   text-align: center;

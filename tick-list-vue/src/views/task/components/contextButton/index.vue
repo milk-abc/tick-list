@@ -10,8 +10,14 @@
 <script>
 export default {
   name: 'contextButton',
+  data () {
+    return {
+      taskName: ''
+    }
+  },
   methods: {
-    init (event) {
+    init (row, column, event) {
+      this.taskName = row.name;
       let menu = document.querySelector('#contextmenu')
       let cha = document.body.clientHeight - event.clientY
       if (cha < 120) {
@@ -19,14 +25,14 @@ export default {
       } else {
         menu.style.top = event.clientY - 45 + 'px'
       }
-      menu.style.left = event.clientX - 45 + 'px'
+      menu.style.left = event.clientX - 200 + 'px'
       document.addEventListener('click', this.hideMenu)
     },
     hideMenu () {
       this.$emit('hideMenu')
     },
     handleCountdown () {
-      this.$emit('handleCountdown')
+      this.$emit('handleCountdown', this.taskName)
     },
     handleTiming () {
       this.$emit('handleTiming')
