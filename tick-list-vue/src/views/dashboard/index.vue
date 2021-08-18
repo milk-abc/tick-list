@@ -28,8 +28,9 @@
     </el-card>
     <el-divider />
     <div class="checkSelect">
-      <el-checkbox v-model="weekChecked">上周完成清单</el-checkbox>
+      <el-checkbox v-model="weekChecked">上周创建完成清单</el-checkbox>
       <el-checkbox v-model="monthChecked">上月完成清单</el-checkbox>
+      <el-checkbox v-model="weekCategoryChecked">上周创建标签分类</el-checkbox>
       <el-checkbox v-model="dayChecked">今日完成清单</el-checkbox>
     </div>
     <el-divider />
@@ -45,7 +46,6 @@
           </div>
           <ve-histogram :data="dayData"
                         :settings="chartSettings" />
-
         </el-col>
 
         <el-col v-if="monthChecked"
@@ -61,8 +61,19 @@
         </el-col>
       </el-row>
       <el-row>
+        <el-col v-if="weekCategoryChecked"
+                :span="12">
+          <div class="zoom-parent">
+            <span class="zoom-in-category"
+                  @click="zoomIn('categoryWeek')">
+              <i class="el-icon-zoom-in"></i>
+            </span>
+          </div>
+          <ve-histogram :data="dayCategoryData"
+                        :settings="chartSettings" />
+        </el-col>
         <el-col v-if="dayChecked"
-                :span="24">
+                :span="12">
           <div class="zoom-parent">
             <span class="zoom-in-category"
                   @click="zoomIn('day')">
@@ -108,7 +119,9 @@ export default {
         day: '每日完成数量',
         total: '每日创建数量',
         week: '每周完成数量',
-        count: '数量'
+        count: '数量',
+        categoryDay: '每日创建分类数量',
+        labelDay: '每日创建标签数量'
       }
     }
     return {
@@ -116,10 +129,16 @@ export default {
       isloading: false,
       zoomInDefaultKey: '',
       weekChecked: true,
+      weekCategoryChecked: true,
       monthChecked: true,
       dayChecked: true,
       dayData: {
         columns: ['date', 'day', 'total'],
+        // rows需要初始化为空列表，而不是Null，否则前端会认为这个为空而报错
+        rows: []
+      },
+      dayCategoryData: {
+        columns: ['date', 'categoryDay', 'labelDay'],
         // rows需要初始化为空列表，而不是Null，否则前端会认为这个为空而报错
         rows: []
       },
@@ -189,6 +208,14 @@ export default {
         extend: {}
       }
     },
+    weekCategoryOption () {
+      return {
+        type: 've-histogram',
+        data: this.dayCategoryData,
+        settings: this.chartSettings,
+        extend: {}
+      }
+    },
     monthOption () {
       return {
         type: 've-line',
@@ -230,6 +257,11 @@ export default {
         this.weekData.rows = res.data.data
       })
     },
+    getCategoryData () {//修改接口名，获得上周创建标签分类的数据
+      this.$axios.get(`task/countTaskForWeek/${this.global.user.id}`).then((res) => {
+        this.dayCategoryData.rows = res.data.data
+      })
+    },
     getStatistics () {
       this.$axios.get(`task/getStatistics/${this.global.user.id}`).then((res) => {
         this.statistics = res.data.data
@@ -250,8 +282,9 @@ export default {
     },
     getZoomInDataList () {
       return [
-        { key: 'week', label: '上周完成清单', options: this.weekOption },
+        { key: 'week', label: '上周创建清单', options: this.weekOption },
         { key: 'month', label: '上月完成清单', options: this.monthOption },
+        { key: 'categoryWeek', label: '上周创建标签分类', options: this.weekCategoryOption },
         { key: 'day', label: '今日完成清单', options: this.dayOption },
       ]
     }
