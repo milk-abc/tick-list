@@ -85,21 +85,31 @@ export default {
         this.$refs.password.focus()
       });
     },
+    login (jseForm) {
+      this.$axios.post('/login', jseForm).then(res => {
+        const jwt = res.headers['authorization']
+        const userInfo = res.data.user
+        console.log('userInfo', userInfo)
+        _this.$store.commit('SET_TOKEN', jwt)
+        _this.$store.commit("SET_USERINFO", userInfo)
+        // 登录之后，给axios统一设置头部token信息
+        this.$axios.defaults.headers.common['Authorization'] = localStorage.getItem('token')
+        _this.$router.push('/layout')
+      })
+    },
     submitForm (formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
           const _this = this
-          this.$axios.get('/getPublicKey').then()
-          this.$axios.post('/login', this.loginForm).then(res => {
-            const jwt = res.headers['authorization']
-            const userInfo = res.data.user
-            console.log('userInfo', userInfo)
-            _this.$store.commit('SET_TOKEN', jwt)
-            _this.$store.commit("SET_USERINFO", userInfo)
-            // 登录之后，给axios统一设置头部token信息
-            this.$axios.defaults.headers.common['Authorization'] = localStorage.getItem('token')
-            _this.$router.push('/layout')
+          this.$axios.get('/getPublicKey').then(res => {
+            let jsePassword = encrypt(this.loginForm.password, res.data.msg);
+            let jseForm = {
+              username: this.loginForm.username,
+              password: jsePassword
+            }
+            this.login(jseForm);
           })
+
         } else {
           console.log('error submit!!')
           return false
