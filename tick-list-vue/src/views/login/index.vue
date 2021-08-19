@@ -50,7 +50,7 @@
 </template>
 
 <script>
-
+import { encrypt, decrypt } from '@/utils/jsencrypt'
 export default {
   name: 'login',
   components: {},
@@ -89,8 +89,8 @@ export default {
       this.$refs[formName].validate(valid => {
         if (valid) {
           const _this = this
+          this.$axios.get('/getPublicKey').then()
           this.$axios.post('/login', this.loginForm).then(res => {
-
             const jwt = res.headers['authorization']
             const userInfo = res.data.user
             console.log('userInfo', userInfo)
