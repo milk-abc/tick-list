@@ -1,13 +1,13 @@
 <template>
-  <div class="login-container">
-    <el-form ref="loginForm"
-             :model="loginForm"
-             :rules="loginRules"
-             class="login-form"
+  <div class="register-container">
+    <el-form ref="registerForm"
+             :model="registerForm"
+             :rules="registerRules"
+             class="register-form"
              auto-complete="on"
              label-position="left">
       <div class="title-container">
-        <h3 class="title">Tick-List</h3>
+        <h3 class="title">注册</h3>
       </div>
 
       <el-form-item prop="username">
@@ -15,12 +15,11 @@
           <i class="el-icon-user"></i>
         </span>
         <el-input ref="username"
-                  v-model="loginForm.username"
+                  v-model="registerForm.username"
                   placeholder="用户名"
                   name="username"
                   type="text"
-                  tabindex="1"
-                  auto-complete="on" />
+                  tabindex="1" />
       </el-form-item>
 
       <el-form-item prop="password">
@@ -28,44 +27,43 @@
           <i class="el-icon-lock"></i>
         </span>
         <el-input ref="password"
-                  v-model="loginForm.password"
+                  v-model="registerForm.password"
                   placeholder="密码"
                   name="password"
                   :type="passwordType"
                   tabindex="2"
                   auto-complete="on"
-                  @keyup.enter.native="handleLogin" />
+                  @keyup.enter.native="handleregister" />
         <span class="show-pwd"
               @click="showPwd">
           <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
         </span>
       </el-form-item>
-      <div class="btn">
+      <div class="btngroup">
+        <el-button type="primary"
+                   class="registerBtn"
+                   @click="submitForm('registerForm')">注册</el-button>
         <el-button type="text"
-                   @click="$router.push('/register')">注册</el-button>
-        <el-button type="text"
-                   @click="$router.push('/forgetword')">忘记密码</el-button>
+                   @click="$router.push('/login')">登录</el-button>
       </div>
-      <el-button type="primary"
-                 class="loginBtn"
-                 @click="submitForm('loginForm')">登录</el-button>
     </el-form>
 
   </div>
 </template>
 
 <script>
+import { encrypt, decrypt } from '@/utils/jsencrypt'
 export default {
-  name: 'login',
+  name: 'register',
   components: {},
   data () {
     //这里存放数据
     return {
-      loginForm: {
-        username: 'admin',
-        password: '123456'
+      registerForm: {
+        username: '',
+        password: ''
       },
-      loginRules: {
+      registerRules: {
         username: [
           { required: true, message: '请输入用户名', trigger: 'blur' },
           { min: 3, max: 15, message: '长度在 3 到 15 个字符', trigger: 'blur' }
@@ -89,30 +87,31 @@ export default {
         this.$refs.password.focus()
       });
     },
-    login (jseForm) {
+    register (jseForm) {
       const _this = this;
-      this.$axios.post('/login', jseForm).then(res => {
-        const jwt = res.headers['authorization']
-        const userInfo = res.data.user
-        console.log('userInfo', userInfo)
-        _this.$store.commit('SET_TOKEN', jwt)
-        _this.$store.commit("SET_USERINFO", userInfo)
-        // 登录之后，给axios统一设置头部token信息
-        this.$axios.defaults.headers.common['Authorization'] = localStorage.getItem('token')
-        _this.$router.push('/layout')
+      this.$axios.post('/register', jseForm).then(res => {
+        this.$axios.post('/login', jseForm).then(res => {
+          const jwt = res.headers['authorization']
+          const userInfo = res.data.user
+          console.log('userInfo', userInfo)
+          _this.$store.commit('SET_TOKEN', jwt)
+          _this.$store.commit("SET_USERINFO", userInfo)
+          // 登录之后，给axios统一设置头部token信息
+          this.$axios.defaults.headers.common['Authorization'] = localStorage.getItem('token')
+          _this.$router.push('/layout')
+        })
       })
     },
     submitForm (formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-
           this.$axios.get('/getPublicKey').then(res => {
-            let jsePassword = this.$encrypt(this.loginForm.password, res.data.msg);
+            let jsePassword = encrypt(this.registerForm.password, res.data.msg);
             let jseForm = {
-              username: this.loginForm.username,
+              username: this.registerForm.username,
               password: jsePassword
             }
-            this.login(jseForm);
+            this.register(jseForm);
           })
 
         } else {
@@ -134,13 +133,13 @@ $cursor: #fff;
 $dark_gray: #889aa4;
 
 @supports (-webkit-mask: none) and (not (cater-color: $cursor)) {
-  .login-container .el-input input {
+  .register-container .el-input input {
     color: $cursor;
   }
 }
 
 /* reset element-ui css */
-.login-container {
+.register-container {
   .el-input {
     display: inline-block;
     height: 47px;
@@ -175,33 +174,25 @@ $dark_gray: #889aa4;
 $bg: #2d3a4b;
 $dark_gray: #889aa4;
 $light_gray: #eee;
-.login-container {
+.register-container {
   min-height: 100%;
   width: 100%;
   background-color: $bg;
   overflow: hidden;
 
-  .login-form {
+  .register-form {
     position: relative;
     width: 520px;
     max-width: 100%;
     padding: 160px 35px 0;
     margin: 0 auto;
     overflow: hidden;
-    .btn {
-      margin-top: -10px;
-      text-align: justify;
-      width: 100%;
-      &:after {
-        content: '';
-        display: inline-block;
+    .btngroup {
+      text-align: center;
+      .registerBtn {
+        display: block;
         width: 100%;
       }
-    }
-    .loginBtn {
-      display: block;
-      width: 100%;
-      margin-top: -20px;
     }
   }
 

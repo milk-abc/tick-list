@@ -12,13 +12,14 @@ import "normalize.css/normalize.css"; // A modern alternative to CSS resets
 import "@/styles/index.scss"; // global css
 import "@/icons"; // icon
 import global_ from "@/views/global/index";
-import VueContextMenu from "vue-contextmenu";
-Vue.use(VueContextMenu);
+import { encrypt, decrypt } from "@/utils/jsencrypt";
 Vue.prototype.global = global_;
 Vue.use(ElementUI);
 
 Vue.config.productionTip = false;
-Vue.prototype.$axios = axios; //
+Vue.prototype.$axios = axios;
+Vue.prototype.$encrypt = encrypt;
+Vue.prototype.$decrypt = decrypt;
 import VCharts from "v-charts";
 Vue.use(VCharts);
 /* eslint-disable no-new */

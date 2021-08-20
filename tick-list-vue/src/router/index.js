@@ -17,6 +17,18 @@ export default new Router({
       hidden: true
     },
     {
+      path: "/register",
+      name: "Register",
+      component: () => import("@/views/register/index.vue"),
+      hidden: true
+    },
+    {
+      path: "/forgetword",
+      name: "Forget",
+      component: () => import("@/views/forgetword/index.vue"),
+      hidden: true
+    },
+    {
       path: "/404",
       component: () => import("@/views/404"),
       hidden: true

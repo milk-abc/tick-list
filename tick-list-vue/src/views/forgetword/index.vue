@@ -1,13 +1,13 @@
 <template>
-  <div class="login-container">
-    <el-form ref="loginForm"
-             :model="loginForm"
-             :rules="loginRules"
-             class="login-form"
+  <div class="forget-container">
+    <el-form ref="forgetForm"
+             :model="forgetForm"
+             :rules="forgetRules"
+             class="forget-form"
              auto-complete="on"
              label-position="left">
       <div class="title-container">
-        <h3 class="title">Tick-List</h3>
+        <h3 class="title">重置密码</h3>
       </div>
 
       <el-form-item prop="username">
@@ -15,7 +15,7 @@
           <i class="el-icon-user"></i>
         </span>
         <el-input ref="username"
-                  v-model="loginForm.username"
+                  v-model="forgetForm.username"
                   placeholder="用户名"
                   name="username"
                   type="text"
@@ -28,49 +28,63 @@
           <i class="el-icon-lock"></i>
         </span>
         <el-input ref="password"
-                  v-model="loginForm.password"
-                  placeholder="密码"
+                  v-model="forgetForm.oldpassword"
+                  placeholder="旧密码"
                   name="password"
                   :type="passwordType"
                   tabindex="2"
-                  auto-complete="on"
-                  @keyup.enter.native="handleLogin" />
+                  auto-complete="on" />
         <span class="show-pwd"
               @click="showPwd">
           <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
         </span>
       </el-form-item>
-      <div class="btn">
-        <el-button type="text"
-                   @click="$router.push('/register')">注册</el-button>
-        <el-button type="text"
-                   @click="$router.push('/forgetword')">忘记密码</el-button>
-      </div>
+      <el-form-item prop="password">
+        <span class="svg-container">
+          <i class="el-icon-lock"></i>
+        </span>
+        <el-input ref="password"
+                  v-model="forgetForm.newpassword"
+                  placeholder="请输入新密码"
+                  name="password"
+                  :type="passwordType"
+                  tabindex="2"
+                  auto-complete="on" />
+        <span class="show-pwd"
+              @click="showPwd">
+          <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
+        </span>
+      </el-form-item>
       <el-button type="primary"
-                 class="loginBtn"
-                 @click="submitForm('loginForm')">登录</el-button>
+                 class="forgetBtn"
+                 @click="submitForm('forgetForm')">更换密码</el-button>
     </el-form>
-
   </div>
 </template>
 
 <script>
+
 export default {
-  name: 'login',
+  name: 'forgetword',
   components: {},
   data () {
     //这里存放数据
     return {
-      loginForm: {
+      forgetForm: {
         username: 'admin',
-        password: '123456'
+        oldpassword: '123456',
+        newpassword: '1234567'
       },
-      loginRules: {
+      forgetRules: {
         username: [
           { required: true, message: '请输入用户名', trigger: 'blur' },
           { min: 3, max: 15, message: '长度在 3 到 15 个字符', trigger: 'blur' }
         ],
-        password: [
+        oldpassword: [
+          { required: true, message: '请输入密码', trigger: 'blur' },
+          { min: 6, max: 15, message: '长度在 3 到 15 个字符', trigger: 'blur' }
+        ],
+        newpassword: [
           { required: true, message: '请输入密码', trigger: 'blur' },
           { min: 6, max: 15, message: '长度在 3 到 15 个字符', trigger: 'blur' }
         ],
@@ -89,30 +103,25 @@ export default {
         this.$refs.password.focus()
       });
     },
-    login (jseForm) {
+    updatePassword (jseForm) {
       const _this = this;
-      this.$axios.post('/login', jseForm).then(res => {
-        const jwt = res.headers['authorization']
-        const userInfo = res.data.user
-        console.log('userInfo', userInfo)
-        _this.$store.commit('SET_TOKEN', jwt)
-        _this.$store.commit("SET_USERINFO", userInfo)
-        // 登录之后，给axios统一设置头部token信息
-        this.$axios.defaults.headers.common['Authorization'] = localStorage.getItem('token')
-        _this.$router.push('/layout')
+      this.$axios.post('/updatePassword/{33}', jseForm).then(res => {
+        _this.$router.push('/login');
       })
     },
     submitForm (formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-
           this.$axios.get('/getPublicKey').then(res => {
-            let jsePassword = this.$encrypt(this.loginForm.password, res.data.msg);
+            let jseOldPassword = this.$encrypt(this.forgetForm.oldpassword, res.data.msg);
+            let jseNewPassword = this.$encrypt(this.forgetForm.newpassword, res.data.msg);
             let jseForm = {
-              username: this.loginForm.username,
-              password: jsePassword
+              username: this.forgetForm.username,
+              oldPassword: jseOldPassword,
+              newPassword: jseNewPassword
             }
-            this.login(jseForm);
+            console.log(jseForm)
+            this.updatePassword(jseForm);
           })
 
         } else {
@@ -134,13 +143,13 @@ $cursor: #fff;
 $dark_gray: #889aa4;
 
 @supports (-webkit-mask: none) and (not (cater-color: $cursor)) {
-  .login-container .el-input input {
+  .forget-container .el-input input {
     color: $cursor;
   }
 }
 
 /* reset element-ui css */
-.login-container {
+.forget-container {
   .el-input {
     display: inline-block;
     height: 47px;
@@ -175,13 +184,13 @@ $dark_gray: #889aa4;
 $bg: #2d3a4b;
 $dark_gray: #889aa4;
 $light_gray: #eee;
-.login-container {
+.forget-container {
   min-height: 100%;
   width: 100%;
   background-color: $bg;
   overflow: hidden;
 
-  .login-form {
+  .forget-form {
     position: relative;
     width: 520px;
     max-width: 100%;
@@ -198,10 +207,9 @@ $light_gray: #eee;
         width: 100%;
       }
     }
-    .loginBtn {
+    .forgetBtn {
       display: block;
       width: 100%;
-      margin-top: -20px;
     }
   }
 
