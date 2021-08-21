@@ -104,7 +104,6 @@ export default {
       });
     },
     updatePassword (jseForm) {
-      console.log('jse', jseForm)
       const _this = this;
       this.$axios.post('/updatePassword', jseForm).then(res => {
         _this.$router.push('/login');
