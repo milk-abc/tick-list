@@ -105,7 +105,6 @@ export default {
     submitForm (formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-
           this.$axios.get('/getPublicKey').then(res => {
             let jsePassword = this.$encrypt(this.loginForm.password, res.data.msg);
             let jseForm = {

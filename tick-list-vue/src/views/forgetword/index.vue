@@ -29,7 +29,7 @@
         </span>
         <el-input ref="password"
                   v-model="forgetForm.oldpassword"
-                  placeholder="旧密码"
+                  placeholder="请输入旧密码"
                   name="password"
                   :type="passwordType"
                   tabindex="2"
@@ -71,9 +71,9 @@ export default {
     //这里存放数据
     return {
       forgetForm: {
-        username: 'admin',
-        oldpassword: '123456',
-        newpassword: '1234567'
+        username: '',
+        oldpassword: '',
+        newpassword: ''
       },
       forgetRules: {
         username: [
@@ -104,8 +104,9 @@ export default {
       });
     },
     updatePassword (jseForm) {
+      console.log('jse', jseForm)
       const _this = this;
-      this.$axios.post('/updatePassword/{33}', jseForm).then(res => {
+      this.$axios.post('/updatePassword', jseForm).then(res => {
         _this.$router.push('/login');
       })
     },
