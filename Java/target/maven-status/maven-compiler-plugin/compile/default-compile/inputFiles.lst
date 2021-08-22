@@ -27,7 +27,6 @@ D:\study\java\our-task\java\src\main\java\com\water76016\ourtask\service\Tourist
 D:\study\java\our-task\java\src\main\java\com\water76016\ourtask\component\OutOfDateTask.java
 D:\study\java\our-task\java\src\main\java\com\water76016\ourtask\common\ResultCode.java
 D:\study\java\our-task\java\src\main\java\com\water76016\ourtask\config\security\handler\MyAuthenticationFailureHandler.java
-D:\study\java\our-task\java\src\main\java\com\water76016\ourtask\config\DruidConfig.java
 D:\study\java\our-task\java\src\main\java\com\water76016\ourtask\config\security\jwt\JwtAuthTokenFilter.java
 D:\study\java\our-task\java\src\main\java\com\water76016\ourtask\service\impl\RedisServiceImpl.java
 D:\study\java\our-task\java\src\main\java\com\water76016\ourtask\service\impl\UserServiceImpl.java
@@ -62,9 +61,7 @@ D:\study\java\our-task\java\src\main\java\com\water76016\ourtask\mapper\Feedback
 D:\study\java\our-task\java\src\main\java\com\water76016\ourtask\service\TaskLabelService.java
 D:\study\java\our-task\java\src\main\java\com\water76016\ourtask\service\impl\MailServiceImpl.java
 D:\study\java\our-task\java\src\main\java\com\water76016\ourtask\controller\LabelController.java
-D:\study\java\our-task\java\src\main\java\com\water76016\ourtask\filter\DruidFilter.java
 D:\study\java\our-task\java\src\main\java\com\water76016\ourtask\service\TomatoSetService.java
-D:\study\java\our-task\java\src\main\java\com\water76016\ourtask\servlet\DruidServlet.java
 D:\study\java\our-task\java\src\main\java\com\water76016\ourtask\dto\TaskParam.java
 D:\study\java\our-task\java\src\main\java\com\water76016\ourtask\service\impl\TomatoSetServiceImpl.java
 D:\study\java\our-task\java\src\main\java\com\water76016\ourtask\service\impl\FeedbackServiceImpl.java

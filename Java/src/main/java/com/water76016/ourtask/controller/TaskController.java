@@ -39,6 +39,33 @@ public class TaskController {
     @Autowired
     TaskLabelService taskLabelService;
 
+    @ApiOperation("批量添加清单")
+    @PostMapping("/addList")
+    public RestResult addList(@RequestBody @ApiParam("清单controller传输对象") List<TaskParam> taskParamList){
+        for (TaskParam taskParam : taskParamList){
+            if (taskParam.getUserId() == null){
+                return RestResult.errorParams("用户id不能为空");
+            }
+            if (taskParam.getCategoryId() == null){
+                return RestResult.errorParams("分类id不能为空");
+            }
+            if (StrUtil.isEmpty(taskParam.getName())){
+                return RestResult.errorParams("清单名不能为空");
+            }
+            if (StrUtil.isEmpty(taskParam.getDescription())){
+                return RestResult.errorParams("清单描述不能为空");
+            }
+            Task task = Task.builder().id(taskParam.getId()).userId(taskParam.getUserId())
+                    .categoryId(taskParam.getCategoryId()).name(taskParam.getName())
+                    .description(taskParam.getDescription()).build();
+            boolean flag = taskService.saveOrUpdate(task);
+            if (flag == false){
+                return RestResult.error();
+            }
+        }
+        return RestResult.success();
+    }
+
     @ApiOperation("添加/更新一个清单")
     @PostMapping("/save")
     public RestResult saveOrUpdate(@RequestBody @ApiParam("清单controller传输对象") TaskParam taskParam){

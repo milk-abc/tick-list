@@ -108,12 +108,6 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.75</version>
         </dependency>
-<!--        阿里巴巴Druid数据库连接池-->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid-spring-boot-starter</artifactId>
-            <version>1.1.16</version>
-        </dependency>
 <!--        logback日志-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
