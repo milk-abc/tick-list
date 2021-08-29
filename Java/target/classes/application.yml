@@ -1,56 +1,16 @@
 # DataSource Config
 spring:
-  profiles:
-    active: dev
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    #数据库连接池Druid配置
-    type: com.alibaba.druid.pool.DruidDataSource
-    #初始化大小，最小或最大
-    initialSize: 5
-    minIdle: 5
-    maxActive: 20
-    # 配置获取连接等待超时的时间
-    maxWait: 60000
-    # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
-    timeBetweenEvictionRunsMillis: 60000
-    # 配置一个连接在池中最小生存的时间，单位是毫秒
-    minEvictableIdleTimeMillis: 300000
-    validationQuery: SELECT 1 FROM DUAL
-    testWhileIdle: true
-    testOnBorrow: false
-    testOnReturn: false
-    # 打开PSCache, 并且制定每个连接上PSCache的大小
-    poolPreparedStatements: true
-    maxPoolPreparedStatementPerConnectionSize: 20
-    # 配置监控统计拦截的filters,去掉后监控界面sql无法统计，wall用于防火墙
-    filters: stat,wall
-  redis:
-    # Redis服务器地址
-    host: localhost
-    # Redis数据库索引（默认为0）
-    database: 0
-    # Redis服务器连接端口
-    port: 6379
-    # Redis服务器连接密码（默认为空）
-    password:
-    jedis:
-      pool:
-        # 连接池最大连接数（使用负值表示没有限制）
-        max-active: 8
-        # 连接池最大阻塞等待时间（使用负值表示没有限制）
-        max-wait: -1ms
-        # 连接池中的最大空闲连接
-        max-idle: 8
-        # 连接池中的最小空闲连接
-        min-idle: 0
-    # 连接超时时间（毫秒）
-    timeout: 3000ms
+    url: jdbc:mysql://localhost:3306/tick-list?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai&tinyInt1isBit=false&allowPublicKeyRetrieval=true
+    username: root
+#    password: abc+!@#123
+    password: 123456
   mail:
     host: smtp.163.com
     # 在使用时，username和password一定要修改为自己的，否则发送邮件功能无法使用，不影响其他功能
     username: dxylovelq@163.com
-    password:
+    password: SJPLBCHBKHIIQCLF
     default-encoding: UTF-8
     protocol: smtp
     properties:

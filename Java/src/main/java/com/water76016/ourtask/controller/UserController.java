@@ -54,32 +54,4 @@ public class UserController {
         }
         return RestResult.success(user);
     }
-
-    @ApiOperation("修改用户密码")
-    @PostMapping("updatePassword/{id}")
-    public RestResult updatePassword(@PathVariable("id") @ApiParam("用户id") Integer id,
-                                     @ApiParam("旧密码") String oldPassword,
-                                     @ApiParam("新密码") String newPassword){
-        if (id == null){
-            return RestResult.errorParams("用户id为空");
-        }
-        if (StrUtil.isEmpty(oldPassword)){
-            return RestResult.errorParams("旧密码不能为空");
-        }
-        if (StrUtil.isEmpty(newPassword)){
-            return RestResult.errorParams("新密码不能为空");
-        }
-        //先判断用户名和密码是否匹配
-        User user = userService.getById(id);
-        if (user == null){
-            return RestResult.notFindError("该用户不存在");
-        }
-        if (Utils.matches(oldPassword, user.getPassword()) == false){
-            return RestResult.error("用户名和密码不匹配");
-        }
-        String password = Utils.encode(newPassword);
-        user.setPassword(password);
-        boolean flag = userService.updateById(user);
-        return flag ? RestResult.success() : RestResult.error();
-    }
 }

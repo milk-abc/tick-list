@@ -44,8 +44,7 @@ public class TouristServiceImpl implements TouristService {
         User user = new User();
         user.setUsername(username);
         //加密需要把用户密码进行加密存储
-        BCryptPasswordEncoder bcp = new BCryptPasswordEncoder();
-        String encodePassword = bcp.encode(password);
+        String encodePassword = Utils.encode(password);
         user.setPassword(encodePassword);
         user.setRoles("ROLE_USER");
         boolean flag = userService.save(user);

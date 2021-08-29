@@ -4,6 +4,7 @@ package com.water76016.ourtask.controller;
 import com.water76016.ourtask.common.RestResult;
 import com.water76016.ourtask.entity.TomatoSet;
 import com.water76016.ourtask.service.TomatoSetService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author github:water76016
  * @since 2021-03-02
  */
+@Api(value = "番茄控制", tags = {"番茄设置"})
 @RestController
 @RequestMapping("/tomato-set")
 public class TomatoSetController {

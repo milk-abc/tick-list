@@ -32,15 +32,6 @@ public class TaskServiceImpl extends ServiceImpl<TaskMapper, Task> implements Ta
     @Autowired
     CategoryService categoryService;
 
-    @Value("${redis.database}")
-    private String redisDatabase;
-    @Value("${redis.key.task}")
-    private String redisKeyTask;
-    @Value("${redis.key.label}")
-    private String redisKeyLabel;
-    @Value("${redis.expire.common}")
-    private long expire;
-
     @Override
     public Integer countTask(Integer categoryId) {
         QueryWrapper<Task> taskQueryWrapper = new QueryWrapper<>();
