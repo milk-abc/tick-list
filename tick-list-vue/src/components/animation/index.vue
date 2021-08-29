@@ -1,6 +1,5 @@
 <template>
-  <div v-if="isShowLoading"
-       class="Loading">
+  <div class="Loading">
     <div class="ball-beat">
       <div></div>
       <div></div>
@@ -11,9 +10,6 @@
 <script>
 export default {
   name: 'animation',
-  props: {
-    isShowLoading: false,
-  }
 }
 </script>
 <style lang="scss" scoped>

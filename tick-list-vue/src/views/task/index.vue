@@ -1,123 +1,118 @@
 <template>
-  <div>
-    <el-container>
-      <el-header>
+  <div class="task">
+    <div>
+      <el-container>
+        <el-header>
+          <el-row>
+            <el-col :span="5"
+                    align="center">
+              <div>
+                <el-input v-model="selectCondition.name"
+                          placeholder="输入清单名称进行搜索"
+                          prefix-icon="el-icon-search" />
+              </div>
+            </el-col>
+            <el-col :span="8"
+                    align="center">
+              <div>
+                清单分类:
+                <el-select v-model="selectCondition.categoryId"
+                           clearable
+                           placeholder="请选择">
+                  <el-option v-for="item in categoryParamList"
+                             :key="item.id"
+                             :label="item.name"
+                             :value="item.id" />
+                </el-select>
+              </div>
+            </el-col>
+            <el-col :span="8"
+                    align="center">
+              <div>
+                标签分类:
+                <el-select v-model="selectCondition.labelIdList"
+                           multiple
+                           placeholder="请选择">
+                  <el-option v-for="label in labelParamList"
+                             :key="label.id"
+                             :label="label.name"
+                             :value="label.id" />
+                </el-select>
+              </div>
+            </el-col>
+            <el-col :span="3"
+                    align="center">
+              <el-row>
+                <el-button type="primary"
+                           @click="getTaskDataByUserId(taskData.current, taskData.size, selectCondition)">查询</el-button>
+              </el-row>
+            </el-col>
+          </el-row>
+        </el-header>
+        <el-main>
+          <div v-if="taskData.records.length>0">
+            <el-table :data="taskData.records"
+                      @row-contextmenu="rowContextmenu"
+                      stripe
+                      style="width: 100%"
+                      border>
+              <el-table-column prop="name"
+                               width="200"
+                               label="清单名称"
+                               align="center" />
+              <el-table-column prop="description"
+                               label="清单描述"
+                               align="center" />
+              <el-table-column width="200"
+                               label="操作"
+                               align="center">
+                <template slot-scope="scope">
+                  <el-button type="text"
+                             size="small"
+                             @click="changeTaskById(scope.row)">编辑修改</el-button>
+                  <el-divider direction="vertical" />
+                  <el-button type="text"
+                             size="small"
+                             @click="deleteTaskById(scope.row.id)">标记完成</el-button>
+                </template>
+              </el-table-column>
+            </el-table>
+            <context-button v-if="menuVisible"
+                            @hideMenu="hideMenu"
+                            ref="contextButton"
+                            @handleCountdown="handleCountdown"
+                            @handleTiming="handleTiming"></context-button>
+          </div>
+        </el-main>
+      </el-container>
+      <el-footer>
         <el-row>
-          <el-col :span="5"
-                  align="center">
+          <el-col :span="16">
             <div>
-              <el-input v-model="selectCondition.name"
-                        placeholder="输入清单名称进行搜索"
-                        prefix-icon="el-icon-search" />
+              <el-pagination background
+                             :current-page="taskData.current"
+                             :page-sizes="[5, 10, 15, 20]"
+                             :page-size="taskData.size"
+                             layout="total, sizes, prev, pager, next, jumper"
+                             :total="taskData.total"
+                             @size-change="handleSizeChange"
+                             @current-change="handleCurrentChange" />
             </div>
           </el-col>
-          <el-col :span="8"
-                  align="center">
+          <el-col :span="8">
             <div>
-              清单分类:
-              <el-select v-model="selectCondition.categoryId"
-                         clearable
-                         placeholder="请选择">
-                <el-option v-for="item in categoryParamList"
-                           :key="item.id"
-                           :label="item.name"
-                           :value="item.id" />
-              </el-select>
+              <el-button type="text"
+                         @click="addTask()">添加清单</el-button>
             </div>
-          </el-col>
-          <el-col :span="8"
-                  align="center">
-            <div>
-              标签分类:
-              <el-select v-model="selectCondition.labelIdList"
-                         multiple
-                         placeholder="请选择">
-                <el-option v-for="label in labelParamList"
-                           :key="label.id"
-                           :label="label.name"
-                           :value="label.id" />
-              </el-select>
-            </div>
-          </el-col>
-          <el-col :span="3"
-                  align="center">
-            <el-row>
-              <el-button type="primary"
-                         @click="getTaskDataByUserId(taskData.current, taskData.size, selectCondition)">查询</el-button>
-            </el-row>
           </el-col>
         </el-row>
-      </el-header>
-      <el-main>
-        <div v-if="taskData.records.length>0">
-          <el-table :data="taskData.records"
-                    @row-contextmenu="rowContextmenu"
-                    stripe
-                    style="width: 100%"
-                    border>
-            <el-table-column prop="name"
-                             width="200"
-                             label="清单名称"
-                             align="center" />
-            <el-table-column prop="description"
-                             label="清单描述"
-                             align="center" />
-            <el-table-column width="200"
-                             label="操作"
-                             align="center">
-              <template slot-scope="scope">
-                <el-button type="text"
-                           size="small"
-                           @click="changeTaskById(scope.row)">编辑修改</el-button>
-                <el-divider direction="vertical" />
-                <el-button type="text"
-                           size="small"
-                           @click="deleteTaskById(scope.row.id)">标记完成</el-button>
-              </template>
-            </el-table-column>
-          </el-table>
-          <context-button v-if="menuVisible"
-                          @hideMenu="hideMenu"
-                          ref="contextButton"
-                          @handleCountdown="handleCountdown"
-                          @handleTiming="handleTiming"></context-button>
-        </div>
-      </el-main>
-    </el-container>
-    <el-footer>
-      <el-row>
-        <el-col :span="16">
-          <div>
-            <el-pagination background
-                           :current-page="taskData.current"
-                           :page-sizes="[5, 10, 15, 20]"
-                           :page-size="taskData.size"
-                           layout="total, sizes, prev, pager, next, jumper"
-                           :total="taskData.total"
-                           @size-change="handleSizeChange"
-                           @current-change="handleCurrentChange" />
-          </div>
-        </el-col>
-        <el-col :span="8">
-          <div>
-            <el-button type="text"
-                       @click="addTask()">添加清单</el-button>
-          </div>
-        </el-col>
-      </el-row>
-    </el-footer>
-    <div class="timeCard"
-         v-if="isCount">
-      <el-button type="text"
-                 @click="cancelTime"
-                 class="btn"
-                 icon="el-icon-close"></el-button>
-      <div class="text">
-        <span class="time">{{minute}}:{{second}}</span>
-        <span class="taskname">{{taskName}}</span>
-      </div>
-
+      </el-footer>
     </div>
+    <timeCard v-if="isCount"
+              :second="second"
+              :minute="minute"
+              :taskName="taskName"
+              @cancelTime="cancelTime"></timeCard>
   </div>
 </template>
 
@@ -131,7 +126,13 @@
 
 <script>
 import contextButton from './components/contextButton/index.vue'
+import timeCard from './components/timeCard/index.vue'
 export default {
+  name: 'task',
+  components: {
+    timeCard,
+    contextButton
+  },
   data () {
     return {
       selectCondition: {
@@ -159,9 +160,6 @@ export default {
       taskName: ''
     }
   },
-  components: {
-    contextButton
-  },
   created () {
 
   },
@@ -182,11 +180,11 @@ export default {
     },
     minuteCompute () {
       let curmin = parseInt(this.countDownTime / 60)
-      this.minute = curmin < 10 ? `0${curmin}` : curmin
+      this.minute = (curmin < 10 ? `0${curmin}` : curmin).toString()
     },
     secondCompute () {
       let cursec = parseInt(this.countDownTime % 60)
-      this.second = cursec < 10 ? `0${cursec}` : cursec
+      this.second = (cursec < 10 ? `0${cursec}` : cursec).toString()
     },
     rowContextmenu (row, column, event) {
       this.menuVisible = !this.menuVisible;//dom节点刚修改
@@ -212,7 +210,6 @@ export default {
       this.secondCompute();
       this.timer = setTimeout(() => {
         this.countDownTime--;
-        console.log(this.countDownTime)
         if (this.countDownTime < 1) {
           this.countDownTime = 1500;
           localStorage.removeItem('endTime')
@@ -282,34 +279,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.timeCard {
-  z-index: 1;
-  position: relative;
-  width: 200px;
-  height: 100px;
-  border-radius: 2px;
-  box-shadow: 2px 2px 5px #333333;
-  background: #ffff;
-  .btn {
-    display: block;
-    position: absolute;
-    top: -10px;
-    right: 10px;
-    width: 10px;
-    height: 10px;
-    color: rgb(201, 197, 197);
-  }
-  .text {
-    font-size: 30px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    .taskname {
-      display: block;
-      text-align: center;
-    }
-  }
+.task {
+  height: 100%;
 }
 .el-col {
   border-radius: 4px;

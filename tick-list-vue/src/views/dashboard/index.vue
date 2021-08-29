@@ -1,6 +1,6 @@
 <template>
   <div>
-    <loading :isShowLoading="isloading"></loading>
+    <loading v-if="isloading"></loading>
     <el-card>
       <div slot="header"
            class="timeBox">
@@ -126,7 +126,7 @@ export default {
     }
     return {
       curTime: new Date(),
-      isloading: false,
+      isloading: true,
       zoomInDefaultKey: '',
       weekChecked: true,
       weekCategoryChecked: true,
@@ -240,10 +240,10 @@ export default {
     setInterval(() => {
       this.curTime = new Date();
     }, 1000);
+
   },
   methods: {
     async init () {
-      this.isloading = true;
       await Promise.all([this.getDayData(), this.getWeekData(), this.getStatistics(), this.getToday()])
       this.isloading = false;
     },
@@ -293,54 +293,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.loading {
-  width: 200px;
-  height: 200px;
-  box-sizing: border-box;
-  border-radius: 50%;
-  border-top: 10px solid #e74c3c;
-  position: relative;
-  animation: a1 2s linear infinite;
-}
-
-.loading::before,
-.loading::after {
-  content: '';
-  width: 200px;
-  height: 200px;
-  position: absolute;
-  left: 0;
-  top: -10px;
-  box-sizing: border-box;
-  border-radius: 50%;
-}
-.loading::before {
-  border-top: 10px solid #e67e22;
-  transform: rotate(120deg);
-}
-.loading::after {
-  border-top: 10px solid #3498db;
-  transform: rotate(240deg);
-}
-.loading span {
-  position: absolute;
-  width: 200px;
-  height: 200pxs;
-  color: #fff;
-  text-align: center;
-  line-height: 200px;
-  animation: a2 2s linear infinite;
-}
-@keyframes a1 {
-  to {
-    transform: rotate(360deg);
-  }
-}
-@keyframes a2 {
-  to {
-    transform: rotate(-360deg);
-  }
-}
 .timeBox {
   display: flex;
   align-items: center;
