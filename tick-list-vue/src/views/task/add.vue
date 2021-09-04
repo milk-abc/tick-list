@@ -91,7 +91,7 @@ export default {
       }
     }
   },
-  created () {
+  mounted () {
     this.entireForm.push({ ...this.taskParam });
     this.getUserCategoryList()
     this.getLabelParamList()

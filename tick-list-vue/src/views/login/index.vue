@@ -33,12 +33,21 @@
                   name="password"
                   :type="passwordType"
                   tabindex="2"
-                  auto-complete="on"
-                  @keyup.enter.native="handleLogin" />
+                  auto-complete="on" />
         <span class="show-pwd"
               @click="showPwd">
           <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
         </span>
+      </el-form-item>
+      <el-form-item prop="securityCodeValue">
+        <el-input ref="securityCodeValue"
+                  v-model="loginForm.securityCodeValue"
+                  placeholder="验证码"
+                  name="securityCodeValue"
+                  tabindex="2"
+                  @keyup.enter.native="handleLogin" />
+        <img id="img"
+             src="" />
       </el-form-item>
       <div class="btn">
         <el-button type="text"
@@ -63,7 +72,9 @@ export default {
     return {
       loginForm: {
         username: 'admin',
-        password: '123456'
+        password: '123456',
+        securityCodeKey: '',
+        securityCodeValue: ''
       },
       loginRules: {
         username: [
@@ -78,7 +89,28 @@ export default {
       passwordType: 'password',
     };
   },
+  //生命周期 - 创建完成（可以访问当前this实例）
+  mounted () {
+    this.getCode()
+  },
   methods: {
+    getCode () {
+      let xhr = new XMLHttpRequest();
+      xhr.open('get', "http://1.117.235.168:8888/getSecurityCode", true);
+      xhr.responseType = "blob";
+      xhr.send(null);
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4) {
+          if (xhr.status == 200) {
+            let URL = window.URL || window.webkitURL;
+            let url = URL.createObjectURL(new Blob([xhr.response]));
+            document.getElementById('img').src = url;
+            console.log(document.getElementById('img'))
+            this.loginForm.securityCodeKey = xhr.getResponseHeader("Securitycode");
+          }
+        }
+      }
+    },
     showPwd () {
       if (this.passwordType === 'password') {
         this.passwordType = ''
@@ -94,7 +126,6 @@ export default {
       this.$axios.post('/login', jseForm).then(res => {
         const jwt = res.headers['authorization']
         const userInfo = res.data.user
-        console.log('userInfo', userInfo)
         _this.$store.commit('SET_TOKEN', jwt)
         _this.$store.commit("SET_USERINFO", userInfo)
         // 登录之后，给axios统一设置头部token信息
@@ -107,10 +138,9 @@ export default {
         if (valid) {
           this.$axios.get('/getPublicKey').then(res => {
             let jsePassword = this.$encrypt(this.loginForm.password, res.data.msg);
-            let jseForm = {
-              username: this.loginForm.username,
+            let jseForm = Object.assign({}, this.loginForm, {
               password: jsePassword
-            }
+            })
             this.login(jseForm);
           })
 
@@ -121,9 +151,7 @@ export default {
       })
     }
   },
-  //生命周期 - 创建完成（可以访问当前this实例）
-  created () {
-  }
+
 }
 </script>
 <style lang="scss">
@@ -187,6 +215,11 @@ $light_gray: #eee;
     padding: 160px 35px 0;
     margin: 0 auto;
     overflow: hidden;
+    #img {
+      width: 100px;
+      height: 50px;
+      display: inline;
+    }
     .btn {
       margin-top: -10px;
       text-align: justify;
