@@ -39,16 +39,19 @@
           <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
         </span>
       </el-form-item>
-      <el-form-item prop="securityCodeValue">
-        <el-input ref="securityCodeValue"
-                  v-model="loginForm.securityCodeValue"
-                  placeholder="验证码"
-                  name="securityCodeValue"
-                  tabindex="2"
-                  @keyup.enter.native="handleLogin" />
+      <div class="securImg">
+        <el-form-item class="lastItem"
+                      prop="securityCodeValue">
+          <el-input ref="securityCodeValue"
+                    v-model="loginForm.securityCodeValue"
+                    placeholder="验证码"
+                    name="securityCodeValue"
+                    tabindex="2"
+                    @keyup.enter.native="handleLogin" />
+        </el-form-item>
         <img id="img"
              src="" />
-      </el-form-item>
+      </div>
       <div class="btn">
         <el-button type="text"
                    @click="$router.push('/register')">注册</el-button>
@@ -105,7 +108,6 @@ export default {
             let URL = window.URL || window.webkitURL;
             let url = URL.createObjectURL(new Blob([xhr.response]));
             document.getElementById('img').src = url;
-            console.log(document.getElementById('img'))
             this.loginForm.securityCodeKey = xhr.getResponseHeader("Securitycode");
           }
         }
@@ -189,12 +191,22 @@ $dark_gray: #889aa4;
       }
     }
   }
-
   .el-form-item {
     border: 1px solid rgba(255, 255, 255, 0.1);
     background: rgba(0, 0, 0, 0.1);
     border-radius: 5px;
     color: #454545;
+  }
+  .securImg {
+    width: 100%;
+    display: flex;
+    .lastItem {
+      flex: 1 1 auto;
+    }
+    #img {
+      flex: 0 0 30%;
+      height: 47px;
+    }
   }
 }
 </style>
@@ -215,11 +227,7 @@ $light_gray: #eee;
     padding: 160px 35px 0;
     margin: 0 auto;
     overflow: hidden;
-    #img {
-      width: 100px;
-      height: 50px;
-      display: inline;
-    }
+
     .btn {
       margin-top: -10px;
       text-align: justify;
