@@ -90,16 +90,7 @@ export default {
     register (jseForm) {
       const _this = this;
       this.$axios.post('/register', jseForm).then(res => {
-        this.$axios.post('/login', jseForm).then(res => {
-          const jwt = res.headers['authorization']
-          const userInfo = res.data.user
-          console.log('userInfo', userInfo)
-          _this.$store.commit('SET_TOKEN', jwt)
-          _this.$store.commit("SET_USERINFO", userInfo)
-          // 登录之后，给axios统一设置头部token信息
-          this.$axios.defaults.headers.common['Authorization'] = localStorage.getItem('token')
-          _this.$router.push('/layout')
-        })
+        _this.$router.push('/login')
       })
     },
     submitForm (formName) {
@@ -115,7 +106,10 @@ export default {
           })
 
         } else {
-          console.log('error submit!!')
+          this.$message({
+            type: 'error',
+            message: '用户注册：提交错误！！'
+          });
           return false
         }
       })

@@ -147,7 +147,10 @@ export default {
           })
 
         } else {
-          console.log('error submit!!')
+          this.$message({
+            type: 'error',
+            message: '用户登录：提交错误！！'
+          });
           return false
         }
       })
