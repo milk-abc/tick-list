@@ -259,7 +259,6 @@ export default {
     },
     getCategoryData () {//修改接口名，获得上周创建标签分类的数据
       this.$axios.get(`/statistics/countCategoryAndLabelForDay/${this.global.user.id}`).then((res) => {
-        console.log('res', res)
         this.dayCategoryData.rows = res.data.data
       })
     },

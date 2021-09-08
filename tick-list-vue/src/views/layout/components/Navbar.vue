@@ -1,4 +1,4 @@
-<!--  -->
+
 <template>
   <div class="navbar">
     <hamburger :is-active="sidebar.opened"
@@ -11,13 +11,16 @@
       <el-dropdown class="avatar-container"
                    trigger="click">
         <div class="avatar-wrapper">
-          <!-- <el-upload class="avatar-uploader"
-                     :action="$axios.defaults.baseURL+'/upload'"
+          <el-upload class="avatar-uploader"
+                     action="https://jsonplaceholder.typicode.com/posts/"
                      :show-file-list="false"
-                     :on-success="afterUpload"> -->
-          <img :src="avatar"
-               class="user-avatar">
-          <!-- </el-upload> -->
+                     :on-success="handleAvatarSuccess">
+            <img v-if="imageUrl"
+                 :src="imageUrl"
+                 class="avatar">
+            <i v-else
+               class="el-icon-plus avatar-uploader-icon"></i>
+          </el-upload>
           <i class="el-icon-caret-bottom" />
         </div>
         <el-dropdown-menu slot="dropdown"
@@ -53,10 +56,10 @@ export default {
   },
   data () {
     return {
-      user: {
-        username: '请先登录',
-        avatar: 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png',
-      }
+      header: {
+        "Authorization": localStorage.getItem('token')
+      },
+      imageUrl: ''
     }
   },
   computed: {
@@ -67,9 +70,31 @@ export default {
     ])
   },
   methods: {
-    // afterUpload (res) {
-    //   this.avatar = res.url
-    // },
+    handleAvatarSuccess (res, multipartFile) {
+      let formData = new FormData()
+      formData.append('multipartFile', multipartFile.raw)
+      this.$axios({
+        method: 'post',
+        url: '/user/uploadPicture/1',
+        headers: { 'Content-Type': 'multipart/form-data; boundary=<calculated when request is sent>' },
+        data: formData
+      }).then((res) => {
+        console.log('成功')
+      })
+      this.imageUrl = URL.createObjectURL(multipartFile.raw);
+    },
+    beforeAvatarUpload (multipartFile) {
+      const isJPG = multipartFile.type === 'image/jpeg';
+      const isLt2M = multipartFile.size / 1024 / 1024 < 2;
+
+      if (!isJPG) {
+        this.$message.error('上传头像图片只能是 JPG 格式!');
+      }
+      if (!isLt2M) {
+        this.$message.error('上传头像图片大小不能超过 2MB!');
+      }
+      return isJPG && isLt2M;
+    },
     toggleSideBar () {
       this.$store.dispatch('app/toggleSideBar')
     },
@@ -81,10 +106,9 @@ export default {
     }
   },
   //生命周期 - 创建完成（可以访问当前this实例）
-  created () {
+  mounted () {
     if (this.username) {
-      this.user.username = this.username;
-      this.user.avatar = this.avatar;
+      this.imageUrl = this.avatar;
     }
   }
 }
