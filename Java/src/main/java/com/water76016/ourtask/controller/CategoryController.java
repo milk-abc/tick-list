@@ -20,10 +20,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
 /**
  * @author github:water76016
  * @since 2020-07-21
@@ -53,6 +51,15 @@ public class CategoryController {
             return RestResult.success(category);
         }
         return RestResult.error();
+    }
+    @ApiOperation("获取最近一周的分类完成情况")
+    @GetMapping("/countCategoryForDay/{userId}")
+    public RestResult countCategoryForDay(@PathVariable("userId") @ApiParam("用户id") Integer userId){
+        if (userId == null){
+            return RestResult.errorParams("用户id不能为空");
+        }
+        List<TreeMap<String, String>> result = taskService.countTaskForDay(userId);
+        return RestResult.success(result);
     }
 
     @ApiOperation("逻辑删除一个分类")

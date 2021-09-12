@@ -1,25 +1,39 @@
 package com.water76016.ourtask.controller;
 
+import cn.hutool.captcha.CaptchaUtil;
+import cn.hutool.captcha.LineCaptcha;
+import cn.hutool.core.lang.UUID;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.asymmetric.KeyType;
 import cn.hutool.crypto.asymmetric.RSA;
+import cn.hutool.json.JSON;
+import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.water76016.ourtask.common.RestResult;
 import com.water76016.ourtask.common.Utils;
-import com.water76016.ourtask.config.security.jwt.JwtAuthService;
+import com.water76016.ourtask.dto.LoginTo;
 import com.water76016.ourtask.entity.Tourist;
 import com.water76016.ourtask.entity.User;
+import com.water76016.ourtask.service.COSService;
+import com.water76016.ourtask.service.RedisService;
 import com.water76016.ourtask.service.TouristService;
 import com.water76016.ourtask.service.UserService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.security.PublicKey;
+import javax.servlet.http.HttpSession;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -36,6 +50,20 @@ public class TouristController {
     TouristService touristService;
     @Autowired
     UserService userService;
+    @Autowired
+    COSService cosService;
+    @Autowired
+    RedisService redisService;
+
+    @Value("${redis.database}")
+    private String redisDatabase;
+    @Value("${redis.securityCode}")
+    private String redisSecurityCode;
+    @Value("${redis.expire}")
+    private long redisExpire;
+
+
+    LineCaptcha lineCaptcha = CaptchaUtil.createLineCaptcha(200, 100);
 
     @ApiOperation("获取非对称加密公钥")
     @GetMapping("/getPublicKey")
@@ -73,20 +101,6 @@ public class TouristController {
         return touristService.register(tourist);
     }
 
-    @ApiOperation("游客进行登录操作")
-    @PostMapping({"/login"})
-    public RestResult login(@RequestBody @ApiParam("游客对象") Tourist tourist, HttpServletResponse response) {
-        if (StrUtil.isEmpty(tourist.getUsername())){
-            RestResult.errorParams("用户登录：用户名不能为空");
-        }
-        if (StrUtil.isEmpty(tourist.getPassword())){
-            RestResult.errorParams("用户登录：用户密码不能为空");
-        }
-        String password = rsa.decryptStr(tourist.getPassword(), KeyType.PrivateKey);
-        tourist.setPassword(password);
-        return touristService.login(tourist, response);
-    }
-
     @ApiOperation("修改用户密码")
     @PostMapping("updatePassword")
     public RestResult updatePassword(@RequestBody @ApiParam("游客对象") Tourist tourist, HttpServletResponse response){
@@ -121,4 +135,57 @@ public class TouristController {
         return flag ? RestResult.success() : RestResult.error();
     }
 
+    @ApiOperation("获取验证码")
+    @GetMapping("/getSecurityCode")
+    public RestResult getSecurityCode(HttpServletRequest request, HttpServletResponse response){
+        lineCaptcha.createCode();
+        String uuid = UUID.randomUUID().toString();
+        //把验证码的键，放到Redis中
+        String key = redisDatabase + ":" + redisSecurityCode + ":" + uuid;
+        redisService.set(key, lineCaptcha.getCode());
+        redisService.expire(key, redisExpire);
+        //设置响应头
+        response.setHeader("Access-Control-Expose-Headers", "securityCode");
+        response.setHeader("securityCode", uuid);
+        response.setHeader("Pragma", "no-cache");
+        response.setHeader("Cache-Control", "no-cache");
+        response.setDateHeader("Expires", 0);
+        //设置相应内容
+        response.setContentType("image/jpeg");
+        try {
+            response.getOutputStream().write(lineCaptcha.getImageBytes());
+            response.getOutputStream().flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return RestResult.success("获取验证码");
+    }
+
+    @ApiOperation("游客进行登录操作")
+    @PostMapping({"/login"})
+    public RestResult login(@RequestBody @ApiParam("游客对象") LoginTo loginTo, HttpServletResponse response) {
+        if (StrUtil.isEmpty(loginTo.getUsername())){
+            return RestResult.errorParams("用户登录：用户名不能为空");
+        }
+        if (StrUtil.isEmpty(loginTo.getPassword())){
+            return RestResult.errorParams("用户登录：用户密码不能为空");
+        }
+        if (StrUtil.isEmpty(loginTo.getSecurityCodeKey()) || StrUtil.isEmpty(loginTo.getSecurityCodeValue())){
+            return RestResult.errorParams("用户登录：验证码不能为空");
+        }
+        System.out.println("打印登录参数" + JSONUtil.toJsonPrettyStr(loginTo));
+        String key = redisDatabase + ":" + redisSecurityCode + ":" + loginTo.getSecurityCodeKey();
+        Object object = redisService.get(key);
+        if (object == null){
+            return RestResult.errorParams("验证码已失效，请重新输入");
+        }
+        String securityCodeValue = object.toString();
+        if (StrUtil.equals(securityCodeValue, loginTo.getSecurityCodeValue()) == false){
+            return RestResult.errorParams("验证码输入错误，请重新输入");
+        }
+
+        String password = rsa.decryptStr(loginTo.getPassword(), KeyType.PrivateKey);
+        loginTo.setPassword(password);
+        return touristService.login(loginTo, response);
+    }
 }

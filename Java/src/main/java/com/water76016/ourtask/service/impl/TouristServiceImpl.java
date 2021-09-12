@@ -6,11 +6,13 @@ import com.water76016.ourtask.common.RestResult;
 import com.water76016.ourtask.common.Utils;
 import com.water76016.ourtask.config.security.jwt.JwtAuthService;
 import com.water76016.ourtask.config.security.jwt.JwtTokenUtil;
+import com.water76016.ourtask.dto.LoginTo;
 import com.water76016.ourtask.entity.Tourist;
 import com.water76016.ourtask.entity.User;
 import com.water76016.ourtask.service.TouristService;
 import com.water76016.ourtask.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +36,13 @@ public class TouristServiceImpl implements TouristService {
     @Autowired
     JwtTokenUtil jwtTokenUtil;
 
+    @Value("${redis.database}")
+    private String redisDatabase;
+    @Value("${redis.securityCode}")
+    private String redisSecurityCode;
+    @Value("${redis.expire}")
+    private long redisExpire;
+
     /**
      * 游客注册服务
      * */
@@ -55,8 +64,8 @@ public class TouristServiceImpl implements TouristService {
      *游客登录服务
      */
     @Override
-    public RestResult login(Tourist tourist, HttpServletResponse response) {
-        User loginUser = jwtAuthService.login(tourist.getUsername(), tourist.getPassword());
+    public RestResult login(LoginTo loginTo, HttpServletResponse response) {
+        User loginUser = jwtAuthService.login(loginTo.getUsername(), loginTo.getPassword());
         if (loginUser == null){
             return RestResult.error("用户名或密码错误");
         }
