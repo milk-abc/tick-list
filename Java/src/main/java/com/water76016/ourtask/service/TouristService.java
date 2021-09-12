@@ -1,6 +1,7 @@
 package com.water76016.ourtask.service;
 
 import com.water76016.ourtask.common.RestResult;
+import com.water76016.ourtask.dto.LoginTo;
 import com.water76016.ourtask.entity.Tourist;
 
 import javax.servlet.http.HttpServletResponse;
@@ -24,9 +25,9 @@ public interface TouristService {
     /**
      * 游客进行登录操作
      *
-     * @param tourist  the tourist
+     * @param loginTo  the tourist
      * @param response the response
      * @return the rest result
      */
-    RestResult login(Tourist tourist, HttpServletResponse response);
+    RestResult login(LoginTo loginTo,  HttpServletResponse response);
 }

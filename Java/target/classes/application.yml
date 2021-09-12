@@ -4,7 +4,6 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/tick-list?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai&tinyInt1isBit=false&allowPublicKeyRetrieval=true
     username: root
-#    password: abc+!@#123
     password: 123456
   mail:
     host: smtp.163.com
@@ -20,11 +19,32 @@ spring:
       mail.smtp.socketFactory.port: 465
       mail.smtp.socketFactory.class: javax.net.ssl.SSLSocketFactory
       mail.smtp.socketFactory.fallback: false
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password:
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 500
+        min-idle: 0
+    lettuce:
+      shutdown-timeout: 0
+  http:
+    multipart:
+      enable: true
+redis:
+  database: tick-list
+  securityCode: securityCode
+  expire: 10000
 # 邮件发件人
 mail:
   from: dxylovelq@163.com
 
 mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   global-config:
     db-config:
       # 逻辑已删除值
@@ -43,10 +63,17 @@ token:
 
 server:
   port: 8888
-logging:
-  config: classpath:logback-spring.xml
 # 取消邮件的健康检查机制，不让其报错，又很好地保护了个人的SMTP码泄漏
 management:
   health:
     mail:
       enabled: false
+
+cos:
+  secretId: AKIDlLfmdDWYKq42kAJBnriKgneGcleIgogI
+  secretKey: NVO1OVMyKQIuGMCn8D1atwjHZbOvDH5d
+  # regionName只填写这个，小心，不然上传失败
+  regionName: ap-nanjing
+  # bucketName一定是桶名称加上AppId
+  bucketName: tick-list-1301888953
+  imageAddr: https://tick-list-1301888953.cos.ap-nanjing.myqcloud.com/

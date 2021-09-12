@@ -1,11 +1,175 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="437887ee-4aee-48df-a0fb-f4d1cad21c67" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../vue/mock/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/../vue/mock/user.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vue/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/../vue/src/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vue/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../vue/src/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vue/src/views/login/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../vue/src/views/login/index.vue" afterDir="false" />
+    <list default="true" id="437887ee-4aee-48df-a0fb-f4d1cad21c67" name="Default Changelist" comment="[update]:更新后端部分代码">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_gson_gson_2_8_6.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_qcloud_cos_api_5_6_52.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_squareup_okhttp_logging_interceptor_2_7_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_squareup_okhttp_okhttp_2_7_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_squareup_okio_okio_1_12_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_tencentcloudapi_tencentcloud_sdk_java_common_3_1_213.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_tencentcloudapi_tencentcloud_sdk_java_kms_3_1_213.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_codec_commons_codec_1_14.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_logging_commons_logging_1_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_activation_javax_activation_api_1_2_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__javax_xml_bind_jaxb_api_2_3_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__joda_time_joda_time_2_9_9.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpclient_4_5_12.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpcore_4_4_13.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_bouncycastle_bcprov_jdk15on_1_64.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/water76016/ourtask/controller/StatisticsController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/water76016/ourtask/dto/LoginTo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/water76016/ourtask/service/COSService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/water76016/ourtask/service/StatisticsService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/water76016/ourtask/service/impl/COSServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/water76016/ourtask/service/impl/StatisticsServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/intellij-javadocs-4.0.1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/intellij-javadocs-4.0.1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_alibaba_druid_1_1_16.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_alibaba_druid_spring_boot_starter_1_1_16.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_data_redis_2_3_1_RELEASE.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_data_redis_2_1_7_RELEASE.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/app.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/app_2021-03-04-22-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/app_2021-03-10-15-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/app_2021-03-12-13-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/app_2021-03-12-21-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/app_2021-03-20-13-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/app_2021-06-06-10-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/app_2021-06-06-11-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/app_2021-06-06-12-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/app_2021-06-06-22-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/app_2021-06-09-23-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/app_2021-06-27-15-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/app_2021-06-28-23-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/app_2021-07-01-09-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/app_2021-07-25-20-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/app_2021-08-10-23-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/app_2021-08-11-01-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/app_2021-08-11-14-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/app_2021-08-11-17-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/app_2021-08-11-18-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/app_2021-08-11-19-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/app_2021-08-12-23-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/app_2021-08-16-23-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/app_2021-08-17-00-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/app_2021-08-17-23-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/app_2021-08-18-00-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/app_2021-08-19-00-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/app_2021-08-19-01-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/app_2021-08-20-00-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/app_2021-08-20-23-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/app_2021-08-21-21-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/app_2021-08-21-22-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/app_2021-08-21-23-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/app_2021-08-22-14-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/debug.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/error.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/error_2021-03-04-22-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/error_2021-03-12-21-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/error_2021-06-06-12-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/error_2021-08-11-01-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/error_2021-08-11-14-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/error_2021-08-11-17-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/error_2021-08-17-23-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/error_2021-08-17-23-0.log540828459060400.tmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/error_2021-08-18-00-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/error_2021-08-19-00-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/error_2021-08-19-01-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/error_2021-08-20-00-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/info.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/info_2021-03-04-22-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/info_2021-03-10-15-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/info_2021-03-12-13-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/info_2021-03-12-21-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/info_2021-03-20-13-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/info_2021-06-06-10-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/info_2021-06-06-11-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/info_2021-06-06-22-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/info_2021-06-09-23-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/info_2021-06-27-15-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/info_2021-06-28-23-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/info_2021-07-01-09-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/info_2021-07-25-20-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/info_2021-08-10-23-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/info_2021-08-11-01-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/info_2021-08-11-14-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/info_2021-08-11-17-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/info_2021-08-11-18-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/info_2021-08-11-19-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/info_2021-08-12-23-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/info_2021-08-16-23-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/info_2021-08-17-00-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/info_2021-08-17-23-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/info_2021-08-18-00-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/info_2021-08-19-00-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/info_2021-08-19-01-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/info_2021-08-20-00-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/info_2021-08-20-23-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/info_2021-08-21-21-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/info_2021-08-21-22-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/info_2021-08-21-23-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/info_2021-08-22-14-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/trace.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/warn.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/warn_2021-03-04-22-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/warn_2021-03-12-21-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/warn_2021-08-11-01-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/warn_2021-08-11-14-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/warn_2021-08-11-17-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/warn_2021-08-17-00-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/warn_2021-08-17-23-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/warn_2021-08-18-00-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/warn_2021-08-19-00-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/warn_2021-08-20-00-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebAppLogs/logs/warn_2021-08-21-22-0.log.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/our-task.iml" beforeDir="false" afterPath="$PROJECT_DIR$/our-task.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/water76016/ourtask/common/constant/Common.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/water76016/ourtask/common/constant/Common.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/water76016/ourtask/config/GlobalCorsConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/water76016/ourtask/config/GlobalCorsConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/water76016/ourtask/controller/CategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/water76016/ourtask/controller/CategoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/water76016/ourtask/controller/TouristController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/water76016/ourtask/controller/TouristController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/water76016/ourtask/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/water76016/ourtask/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/water76016/ourtask/dto/CategoryParam.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/water76016/ourtask/dto/CategoryParam.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/water76016/ourtask/dto/LabelParam.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/water76016/ourtask/dto/LabelParam.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/water76016/ourtask/dto/SelectCondition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/water76016/ourtask/dto/SelectCondition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/water76016/ourtask/dto/Statistics.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/water76016/ourtask/dto/Statistics.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/water76016/ourtask/dto/TaskParam.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/water76016/ourtask/dto/TaskParam.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/water76016/ourtask/service/CategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/water76016/ourtask/service/CategoryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/water76016/ourtask/service/TouristService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/water76016/ourtask/service/TouristService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/water76016/ourtask/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/water76016/ourtask/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/water76016/ourtask/service/impl/CategoryServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/water76016/ourtask/service/impl/CategoryServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/water76016/ourtask/service/impl/LabelServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/water76016/ourtask/service/impl/LabelServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/water76016/ourtask/service/impl/TouristServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/water76016/ourtask/service/impl/TouristServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/water76016/ourtask/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/water76016/ourtask/service/impl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/logback-spring.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/water76016/ourtask/common/constant/Common.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/water76016/ourtask/common/constant/Common.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/water76016/ourtask/config/GlobalCorsConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/water76016/ourtask/config/GlobalCorsConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/water76016/ourtask/controller/CategoryController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/water76016/ourtask/controller/CategoryController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/water76016/ourtask/controller/TouristController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/water76016/ourtask/controller/TouristController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/water76016/ourtask/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/water76016/ourtask/controller/UserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/water76016/ourtask/dto/CategoryParam.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/water76016/ourtask/dto/CategoryParam.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/water76016/ourtask/dto/LabelParam.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/water76016/ourtask/dto/LabelParam.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/water76016/ourtask/dto/SelectCondition.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/water76016/ourtask/dto/SelectCondition.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/water76016/ourtask/dto/Statistics.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/water76016/ourtask/dto/Statistics.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/water76016/ourtask/dto/TaskParam.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/water76016/ourtask/dto/TaskParam.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/water76016/ourtask/service/TouristService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/water76016/ourtask/service/TouristService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/water76016/ourtask/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/water76016/ourtask/service/UserService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/water76016/ourtask/service/impl/CategoryServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/water76016/ourtask/service/impl/CategoryServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/water76016/ourtask/service/impl/LabelServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/water76016/ourtask/service/impl/LabelServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/water76016/ourtask/service/impl/TouristServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/water76016/ourtask/service/impl/TouristServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/water76016/ourtask/service/impl/UserServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/water76016/ourtask/service/impl/UserServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/logback-spring.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/our-task-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/our-task-0.0.1-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/our-task-0.0.1-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/target/our-task-0.0.1-SNAPSHOT.jar.original" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tick-list-vue/config/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../tick-list-vue/config/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tick-list-vue/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../tick-list-vue/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tick-list-vue/src/axios.js" beforeDir="false" afterPath="$PROJECT_DIR$/../tick-list-vue/src/axios.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +208,11 @@
         <option name="userSettingsFile" value="D:\programs\maven\apache-maven-3.6.3\conf\settings.xml" />
       </MavenGeneralSettings>
     </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
   </component>
   <component name="ProjectId" id="1p9m3kTMV9DzGeevl2KxLukY5kO" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -61,6 +230,7 @@
     <property name="RequestMappingsPanelWidth0" value="75" />
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="project.structure.last.edited" value="Project" />
@@ -147,7 +317,54 @@
       <workItem from="1624412015861" duration="47000" />
       <workItem from="1624504589336" duration="653000" />
       <workItem from="1624694072604" duration="1588000" />
-      <workItem from="1624778581466" duration="2123000" />
+      <workItem from="1624778581466" duration="2124000" />
+      <workItem from="1624894143656" duration="840000" />
+      <workItem from="1625100943186" duration="3382000" />
+      <workItem from="1625200413769" duration="1145000" />
+      <workItem from="1626451207813" duration="205000" />
+      <workItem from="1626451474446" duration="32000" />
+      <workItem from="1627216974981" duration="3274000" />
+      <workItem from="1627315928234" duration="849000" />
+      <workItem from="1627731399737" duration="67000" />
+      <workItem from="1627922431396" duration="647000" />
+      <workItem from="1628303920938" duration="687000" />
+      <workItem from="1628608980377" duration="5000000" />
+      <workItem from="1628662685707" duration="1149000" />
+      <workItem from="1628679172867" duration="2880000" />
+      <workItem from="1628781466395" duration="1311000" />
+      <workItem from="1629128109855" duration="2865000" />
+      <workItem from="1629213595214" duration="3269000" />
+      <workItem from="1629300079102" duration="7419000" />
+      <workItem from="1629390293400" duration="1415000" />
+      <workItem from="1629473197107" duration="1465000" />
+      <workItem from="1629527094333" duration="36000" />
+      <workItem from="1629554336867" duration="3814000" />
+      <workItem from="1629593915343" duration="99000" />
+      <workItem from="1629612328226" duration="2449000" />
+      <workItem from="1629645343492" duration="2262000" />
+      <workItem from="1629647829114" duration="2238000" />
+      <workItem from="1629905640893" duration="6704000" />
+      <workItem from="1629994152888" duration="615000" />
+      <workItem from="1629996367114" duration="540000" />
+      <workItem from="1630135436093" duration="22000" />
+      <workItem from="1630152575164" duration="612000" />
+      <workItem from="1630221520298" duration="631000" />
+      <workItem from="1630231735113" duration="609000" />
+      <workItem from="1630584697350" duration="742000" />
+      <workItem from="1630585542855" duration="594000" />
+      <workItem from="1630665056421" duration="12000" />
+      <workItem from="1630671393883" duration="1157000" />
+      <workItem from="1630719945433" duration="33231000" />
+      <workItem from="1630767993186" duration="1452000" />
+      <workItem from="1630770987666" duration="2356000" />
+      <workItem from="1630809239870" duration="1320000" />
+      <workItem from="1630826683271" duration="612000" />
+      <workItem from="1630945742709" duration="2332000" />
+      <workItem from="1631031099464" duration="2524000" />
+      <workItem from="1631119920828" duration="937000" />
+      <workItem from="1631201980724" duration="4111000" />
+      <workItem from="1631361355531" duration="601000" />
+      <workItem from="1631416142109" duration="5061000" />
     </task>
     <task id="LOCAL-00001" summary="更新代码">
       <created>1622952469606</created>
@@ -168,105 +385,121 @@
     <option name="LAST_COMMIT_MESSAGE" value="更新代码" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="574" y="122" key="#com.intellij.ide.util.MemberChooser" timestamp="1617773736255">
+    <state x="223" y="70" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1628616934345">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="574" y="122" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1617773736255" />
-    <state x="385" y="10" key="CommitChangelistDialog2" timestamp="1622952468360">
+    <state x="223" y="70" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1628616934345" />
+    <state x="574" y="121" key="#com.intellij.ide.util.MemberChooser" timestamp="1630763459195">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="385" y="10" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1622952468360" />
-    <state x="549" y="114" key="FileChooserDialogImpl" timestamp="1624694712877">
+    <state x="574" y="121" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1630763459195" />
+    <state x="499" y="162" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1629905659911">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="549" y="114" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1624694712877" />
-    <state width="1493" height="232" key="GridCell.Tab.0.bottom" timestamp="1624543918347">
+    <state x="499" y="162" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1629905659911" />
+    <state x="0" y="10" key="CommitChangelistDialog2" timestamp="1631424469846">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="232" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1624543918347" />
-    <state width="1493" height="232" key="GridCell.Tab.0.center" timestamp="1624543918347">
+    <state x="0" y="10" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1631424469846" />
+    <state x="147" y="65" key="DiffContextDialog" timestamp="1631424057873">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="232" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1624543918347" />
-    <state width="1493" height="232" key="GridCell.Tab.0.left" timestamp="1624543918347">
+    <state x="147" y="65" key="DiffContextDialog/0.0.1536.824@0.0.1536.824" timestamp="1631424057873" />
+    <state x="549" y="114" key="FileChooserDialogImpl" timestamp="1629906603538">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="232" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1624543918347" />
-    <state width="1493" height="232" key="GridCell.Tab.0.right" timestamp="1624543918347">
+    <state x="549" y="114" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1629906603538" />
+    <state width="1493" height="405" key="GridCell.Tab.0.bottom" timestamp="1631421793041">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="232" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1624543918347" />
-    <state width="1493" height="232" key="GridCell.Tab.1.bottom" timestamp="1623255923916">
+    <state width="1493" height="405" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1631421793041" />
+    <state width="1493" height="405" key="GridCell.Tab.0.center" timestamp="1631421793041">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="232" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1623255923916" />
-    <state width="1493" height="232" key="GridCell.Tab.1.center" timestamp="1623255923916">
+    <state width="1493" height="405" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1631421793041" />
+    <state width="1493" height="405" key="GridCell.Tab.0.left" timestamp="1631421793041">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="232" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1623255923916" />
-    <state width="1493" height="232" key="GridCell.Tab.1.left" timestamp="1623255923916">
+    <state width="1493" height="405" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1631421793041" />
+    <state width="1493" height="405" key="GridCell.Tab.0.right" timestamp="1631421793041">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="232" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1623255923916" />
-    <state width="1493" height="232" key="GridCell.Tab.1.right" timestamp="1623255923916">
+    <state width="1493" height="405" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1631421793041" />
+    <state width="1493" height="405" key="GridCell.Tab.1.bottom" timestamp="1631421793042">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="232" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1623255923916" />
-    <state width="1493" height="275" key="GridCell.Tab.2.bottom" timestamp="1622953281168">
+    <state width="1493" height="405" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1631421793042" />
+    <state width="1493" height="405" key="GridCell.Tab.1.center" timestamp="1631421793042">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="275" key="GridCell.Tab.2.bottom/0.0.1536.824@0.0.1536.824" timestamp="1622953281168" />
-    <state width="1493" height="275" key="GridCell.Tab.2.center" timestamp="1622953281168">
+    <state width="1493" height="405" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1631421793042" />
+    <state width="1493" height="405" key="GridCell.Tab.1.left" timestamp="1631421793041">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="275" key="GridCell.Tab.2.center/0.0.1536.824@0.0.1536.824" timestamp="1622953281168" />
-    <state width="1493" height="275" key="GridCell.Tab.2.left" timestamp="1622953281168">
+    <state width="1493" height="405" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1631421793041" />
+    <state width="1493" height="405" key="GridCell.Tab.1.right" timestamp="1631421793042">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="275" key="GridCell.Tab.2.left/0.0.1536.824@0.0.1536.824" timestamp="1622953281168" />
-    <state width="1493" height="275" key="GridCell.Tab.2.right" timestamp="1622953281168">
+    <state width="1493" height="405" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1631421793042" />
+    <state width="1493" height="405" key="GridCell.Tab.2.bottom" timestamp="1631421793042">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="275" key="GridCell.Tab.2.right/0.0.1536.824@0.0.1536.824" timestamp="1622953281168" />
-    <state x="270" y="54" key="SettingsEditor" timestamp="1623254309706">
+    <state width="1493" height="405" key="GridCell.Tab.2.bottom/0.0.1536.824@0.0.1536.824" timestamp="1631421793042" />
+    <state width="1493" height="405" key="GridCell.Tab.2.center" timestamp="1631421793042">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="270" y="54" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1623254309706" />
+    <state width="1493" height="405" key="GridCell.Tab.2.center/0.0.1536.824@0.0.1536.824" timestamp="1631421793042" />
+    <state width="1493" height="405" key="GridCell.Tab.2.left" timestamp="1631421793042">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="405" key="GridCell.Tab.2.left/0.0.1536.824@0.0.1536.824" timestamp="1631421793042" />
+    <state width="1493" height="405" key="GridCell.Tab.2.right" timestamp="1631421793042">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="405" key="GridCell.Tab.2.right/0.0.1536.824@0.0.1536.824" timestamp="1631421793042" />
+    <state x="270" y="54" key="SettingsEditor" timestamp="1630736463230">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="270" y="54" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1630736463230" />
     <state x="361" y="148" key="Vcs.Push.Dialog.v2" timestamp="1622952488943">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="361" y="148" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1622952488943" />
-    <state x="447" y="145" width="642" height="534" key="find.popup" timestamp="1622951644300">
+    <state x="447" y="145" width="642" height="534" key="find.popup" timestamp="1631206680925">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="447" y="145" width="642" height="534" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1622951644300" />
-    <state x="178" y="114" key="new project wizard" timestamp="1619594116937">
+    <state x="447" y="145" width="642" height="534" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1631206680925" />
+    <state x="178" y="114" key="new project wizard" timestamp="1626451402954">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="178" y="114" key="new project wizard/0.0.1536.824@0.0.1536.824" timestamp="1619594116937" />
+    <state x="178" y="114" key="new project wizard/0.0.1536.824@0.0.1536.824" timestamp="1626451402954" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1631206679873">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1631206679873" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/water76016/ourtask/controller/TaskController.java</url>
-          <line>85</line>
+          <line>112</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/water76016/ourtask/config/security/jwt/JwtAuthTokenFilter.java</url>
-          <line>44</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/water76016/ourtask/service/impl/TouristServiceImpl.java</url>
-          <line>60</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/water76016/ourtask/config/security/jwt/JwtAuthService.java</url>
           <line>34</line>
-          <option name="timeStamp" value="4" />
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/water76016/ourtask/controller/UserController.java</url>
+          <line>68</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/water76016/ourtask/service/impl/COSServiceImpl.java</url>
+          <line>53</line>
+          <option name="timeStamp" value="20" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
