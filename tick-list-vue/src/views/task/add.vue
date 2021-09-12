@@ -72,7 +72,7 @@ export default {
       tid: 0,
       taskParam: {
         id: 0,
-        userId: this.global.user.id,
+        userId: this.$store.state.userInfo.id,
         categoryId: null,
         name: '',
         labelList: [],
@@ -136,12 +136,12 @@ export default {
       })
     },
     getUserCategoryList () {
-      this.$axios.get(`category/listAll/${this.global.user.id}`).then((res) => {
+      this.$axios.get(`category/listAll/${this.$store.state.userInfo.id}`).then((res) => {
         this.categoryList = res.data.data
       })
     },
     getLabelParamList () {
-      this.$axios.get(`label/listAll/${this.global.user.id}`).then((res) => {
+      this.$axios.get(`label/listAll/${this.$store.state.userInfo.id}`).then((res) => {
         this.labelParamList = res.data.data
       })
     },

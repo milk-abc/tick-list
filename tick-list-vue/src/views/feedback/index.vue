@@ -27,7 +27,7 @@ export default {
   data () {
     return {
       feedback: {
-        userId: this.global.user.id,
+        userId: this.$store.state.userInfo.id,
         title: '',
         description: ''
       },

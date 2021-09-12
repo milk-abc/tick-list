@@ -12,7 +12,7 @@
                    trigger="click">
         <div class="avatar-wrapper">
           <el-upload class="avatar-uploader"
-                     action="https://jsonplaceholder.typicode.com/posts/"
+                     :action="`http://1.117.235.168:8888/user/uploadPicture/${this.$store.state.userInfo.id}`"
                      :show-file-list="false"
                      :on-success="handleAvatarSuccess">
             <img v-if="imageUrl"
@@ -75,7 +75,7 @@ export default {
       formData.append('multipartFile', multipartFile.raw)
       this.$axios({
         method: 'post',
-        url: '/user/uploadPicture/1',
+        url: `/user/uploadPicture/${this.$store.state.userInfo.id}`,
         headers: { 'Content-Type': 'multipart/form-data; boundary=<calculated when request is sent>' },
         data: formData
       }).then((res) => {

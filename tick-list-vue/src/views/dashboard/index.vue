@@ -248,27 +248,27 @@ export default {
       this.isloading = false;
     },
     getDayData () {
-      this.$axios.get(`task/countTaskForDay/${this.global.user.id}`).then((res) => {
+      this.$axios.get(`task/countTaskForDay/${this.$store.state.userInfo.id}`).then((res) => {
         this.dayData.rows = res.data.data
       })
     },
     getWeekData () {
-      this.$axios.get(`task/countTaskForWeek/${this.global.user.id}`).then((res) => {
+      this.$axios.get(`task/countTaskForWeek/${this.$store.state.userInfo.id}`).then((res) => {
         this.weekData.rows = res.data.data
       })
     },
     getCategoryData () {//修改接口名，获得上周创建标签分类的数据
-      this.$axios.get(`/statistics/countCategoryAndLabelForDay/${this.global.user.id}`).then((res) => {
+      this.$axios.get(`/statistics/countCategoryAndLabelForDay/${this.$store.state.userInfo.id}`).then((res) => {
         this.dayCategoryData.rows = res.data.data
       })
     },
     getStatistics () {
-      this.$axios.get(`task/getStatistics/${this.global.user.id}`).then((res) => {
+      this.$axios.get(`task/getStatistics/${this.$store.state.userInfo.id}`).then((res) => {
         this.statistics = res.data.data
       })
     },
     getToday () {
-      this.$axios.get(`task/countTodayForCategory/${this.global.user.id}`).then((res) => {
+      this.$axios.get(`task/countTodayForCategory/${this.$store.state.userInfo.id}`).then((res) => {
         this.today.rows = res.data.data
       })
     },

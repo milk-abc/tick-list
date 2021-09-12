@@ -128,6 +128,7 @@ export default {
       this.$axios.post('/login', jseForm).then(res => {
         const jwt = res.headers['authorization']
         const userInfo = res.data.user
+        console.log('userInfo', userInfo)
         _this.$store.commit('SET_TOKEN', jwt)
         _this.$store.commit("SET_USERINFO", userInfo)
         // 登录之后，给axios统一设置头部token信息

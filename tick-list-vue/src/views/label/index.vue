@@ -76,7 +76,7 @@ export default {
   },
   methods: {
     getlabelData (currentPage, pageSize) {
-      this.$axios.get(`label/getPageList/${this.global.user.id}/${currentPage}/${pageSize}`).then((res) => {
+      this.$axios.get(`label/getPageList/${this.$store.state.userInfo.id}/${currentPage}/${pageSize}`).then((res) => {
         this.labelData = res.data.data
       })
     },
@@ -132,7 +132,7 @@ export default {
         inputPattern: /^[\u4e00-\u9fffa-zA-Z0-9]{1,6}$/,
         inputErrorMessage: '长度不能超过6个字符或不能存在空格'
       }).then(({ value }) => {
-        var label = { id: null, userId: this.global.user.id, name: value }
+        var label = { id: null, userId: this.$store.state.userInfo.id, name: value }
         this.$axios.post('label/add/', label).then((res) => {
           label.id = res.data.data.id
           label.taskCount = 0

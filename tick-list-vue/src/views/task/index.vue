@@ -228,18 +228,18 @@ export default {
       this.isCount = false;
     },
     getTaskDataByUserId (currentPage, pageSize, selectCondition) {
-      this.$axios.post(`task/getPageList/${this.global.user.id}/${currentPage}/${pageSize}`, this.selectCondition)
+      this.$axios.post(`task/getPageList/${this.$store.state.userInfo.id}/${currentPage}/${pageSize}`, this.selectCondition)
         .then((res) => {
           this.taskData = res.data.data
         })
     },
     getUserCategoryParamList () {
-      this.$axios.get(`category/listAll/${this.global.user.id}`).then((res) => {
+      this.$axios.get(`category/listAll/${this.$store.state.userInfo.id}`).then((res) => {
         this.categoryParamList = res.data.data
       })
     },
     getLabelParamList () {
-      this.$axios.get(`label/listAll/${this.global.user.id}`).then((res) => {
+      this.$axios.get(`label/listAll/${this.$store.state.userInfo.id}`).then((res) => {
         this.labelParamList = res.data.data
       })
     },

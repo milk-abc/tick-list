@@ -76,7 +76,7 @@ export default {
   },
   methods: {
     getUsercategoryDataList (currentPage, pageSize) {
-      this.$axios.get(`category/getPageList/${this.global.user.id}/${currentPage}/${pageSize}`).then((res) => {
+      this.$axios.get(`category/getPageList/${this.$store.state.userInfo.id}/${currentPage}/${pageSize}`).then((res) => {
         this.categoryData = res.data.data
       })
     },
@@ -96,7 +96,7 @@ export default {
         cancelButtonText: '取消',
         type: 'info'
       }).then(() => {
-        this.$axios.get(`category/delete/${categoryId}/${this.global.user.id}`).then((res) => {
+        this.$axios.get(`category/delete/${categoryId}/${this.$store.state.userInfo.id}`).then((res) => {
           this.getUsercategoryDataList(1, 5)
         })
         this.success('删除分类成功')
@@ -134,7 +134,7 @@ export default {
         inputPattern: /^[\u4e00-\u9fffa-zA-Z0-9]{1,6}$/,
         inputErrorMessage: '长度不能超过6个字符或不能存在空格'
       }).then(({ value }) => {
-        var category = { id: null, userId: this.global.user.id, name: value }
+        var category = { id: null, userId: this.$store.state.userInfo.id, name: value }
         this.$axios.post('category/add/', category).then((res) => {
           category.id = res.data.data.id
           category.taskCount = 0
