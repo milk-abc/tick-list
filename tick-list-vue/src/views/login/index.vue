@@ -39,8 +39,7 @@
           <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
         </span>
       </el-form-item>
-      <div class="securImg"
-           @click="getCode">
+      <div class="securImg">
         <el-form-item class="lastItem"
                       prop="securityCodeValue">
           <el-input ref="securityCodeValue"
@@ -51,6 +50,7 @@
                     @keyup.enter.native="handleLogin" />
         </el-form-item>
         <img id="img"
+             @click="getCode"
              src="" />
       </div>
       <div class="btn">
