@@ -39,7 +39,8 @@
           <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
         </span>
       </el-form-item>
-      <div class="securImg">
+      <div class="securImg"
+           @click="getCode">
         <el-form-item class="lastItem"
                       prop="securityCodeValue">
           <el-input ref="securityCodeValue"
