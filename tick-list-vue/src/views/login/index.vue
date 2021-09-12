@@ -99,7 +99,7 @@ export default {
   methods: {
     getCode () {
       let xhr = new XMLHttpRequest();
-      xhr.open('get', "http://1.117.235.168:8888/getSecurityCode", true);
+      xhr.open('get', `${this.$axios.defaults.baseURL}/getSecurityCode`, true);
       xhr.responseType = "blob";
       xhr.send(null);
       xhr.onreadystatechange = () => {

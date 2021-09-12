@@ -12,12 +12,13 @@
                    trigger="click">
         <div class="avatar-wrapper">
           <el-upload class="avatar-uploader"
-                     :action="`http://1.117.235.168:8888/user/uploadPicture/${this.$store.state.userInfo.id}`"
+                     :action="`${this.$axios.defaults.baseURL}/user/uploadPicture/${this.$store.state.userInfo.id}`"
+                     name='multipartFile'
                      :show-file-list="false"
                      :on-success="handleAvatarSuccess">
             <img v-if="imageUrl"
                  :src="imageUrl"
-                 class="avatar">
+                 class="user-avatar" />
             <i v-else
                class="el-icon-plus avatar-uploader-icon"></i>
           </el-upload>
@@ -73,27 +74,7 @@ export default {
     handleAvatarSuccess (res, multipartFile) {
       let formData = new FormData()
       formData.append('multipartFile', multipartFile.raw)
-      this.$axios({
-        method: 'post',
-        url: `/user/uploadPicture/${this.$store.state.userInfo.id}`,
-        headers: { 'Content-Type': 'multipart/form-data; boundary=<calculated when request is sent>' },
-        data: formData
-      }).then((res) => {
-        console.log('成功')
-      })
       this.imageUrl = URL.createObjectURL(multipartFile.raw);
-    },
-    beforeAvatarUpload (multipartFile) {
-      const isJPG = multipartFile.type === 'image/jpeg';
-      const isLt2M = multipartFile.size / 1024 / 1024 < 2;
-
-      if (!isJPG) {
-        this.$message.error('上传头像图片只能是 JPG 格式!');
-      }
-      if (!isLt2M) {
-        this.$message.error('上传头像图片大小不能超过 2MB!');
-      }
-      return isJPG && isLt2M;
     },
     toggleSideBar () {
       this.$store.dispatch('app/toggleSideBar')
@@ -108,6 +89,7 @@ export default {
   //生命周期 - 创建完成（可以访问当前this实例）
   mounted () {
     if (this.username) {
+      console.log('avatar', this.avatar)
       this.imageUrl = this.avatar;
     }
   }

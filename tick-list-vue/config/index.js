@@ -11,7 +11,7 @@ module.exports = {
     assetsPublicPath: "/",
     proxyTable: {
       // '/test':{//定义的代理名
-      //   target:'http://1.117.235.168:8888',//目标接口地址
+      //   target:'this.$axios.defaults.baseURL',//目标接口地址
       //   secure:true,//如果是https需要开启这个选项
       //   changeOrigin:true,//是否允许跨域
       //   pathRewrite:{//如果没有这一项代表/test/login指http://1.117.235.168:8888/test/login
