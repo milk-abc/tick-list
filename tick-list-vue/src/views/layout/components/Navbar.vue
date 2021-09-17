@@ -89,7 +89,6 @@ export default {
   //生命周期 - 创建完成（可以访问当前this实例）
   mounted () {
     if (this.username) {
-      console.log('avatar', this.avatar)
       this.imageUrl = this.avatar;
     }
   }
