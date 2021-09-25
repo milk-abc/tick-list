@@ -51,9 +51,6 @@ public class LabelController {
         queryWrapper.eq("user_id", userId);
         queryWrapper.eq("run", 1);
         List<Label> labelList = labelService.list(queryWrapper);
-        if (labelList == null || labelList.size() == 0){
-            return RestResult.noContentSuccess();
-        }
         List<LabelParam> labelParamList = new ArrayList<>();
         for (Label label : labelList){
             int labelId = label.getId();
