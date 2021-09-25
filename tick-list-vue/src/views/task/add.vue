@@ -92,12 +92,12 @@ export default {
     }
   },
   mounted () {
-    this.entireForm.push({ ...this.taskParam });
     this.getUserCategoryList()
     this.getLabelParamList()
     if (Object.keys(this.$route.query).length !== 0) {
       this.taskParam = this.$route.query.taskParam
     }
+    this.entireForm.push({ ...this.taskParam });
   },
   methods: {
     addForm () {
