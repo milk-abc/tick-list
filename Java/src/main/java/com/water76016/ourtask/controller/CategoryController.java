@@ -94,9 +94,6 @@ public class CategoryController {
             return RestResult.errorParams("用户id不能为空");
         }
         List<Map<String, Object>> categoryList = categoryService.list(userId);
-        if (categoryList == null){
-            return RestResult.noContentSuccess();
-        }
         //根据分类列表,设置分类传输对象列表
         List<CategoryParam> categoryParamList = taskService.getCategoryParamList(categoryList);
         return RestResult.success(categoryParamList);

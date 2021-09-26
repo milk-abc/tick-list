@@ -2,6 +2,7 @@ package com.water76016.ourtask.service.impl;
 
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.water76016.ourtask.common.Constant;
 import com.water76016.ourtask.common.RestResult;
 import com.water76016.ourtask.common.Utils;
 import com.water76016.ourtask.config.security.jwt.JwtAuthService;
@@ -56,6 +57,7 @@ public class TouristServiceImpl implements TouristService {
         String encodePassword = Utils.encode(password);
         user.setPassword(encodePassword);
         user.setRoles("ROLE_USER");
+        user.setHeadPortrait(Constant.headPortrait);
         boolean flag = userService.save(user);
         return flag ? RestResult.success() : RestResult.error();
     }
