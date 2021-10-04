@@ -69,7 +69,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //配置权限
                 .authorizeRequests()
                 // 对于登录login 验证码captchaImage 允许匿名访问
-                .antMatchers("/login", "/register").anonymous()
+                .antMatchers("/login", "/register", "/getPublicKey", "/getPassword", "/updatePassword", "/getSecurityCode").anonymous()
                 .antMatchers(
                         HttpMethod.GET,
                         "/*.html",
@@ -90,14 +90,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.OPTIONS)
                 .permitAll()
 //                需要对外暴露的资源路径
-                .antMatchers("login", "register")
+                .antMatchers("login", "register", "getPublicKey", "getPassword", "updatePassword", "getSecurityCode")
 //                user角色和admin角色都可以访问
                 .hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
-                .antMatchers("user/*", "task/*", "category/*")
+                .antMatchers("user/*", "task/*", "category/*", "feedback/*", "label/*", "statistics/")
                 //admin角色可以访问
                 .hasAnyRole("ADMIN")
                 // 除上面外的所有请求全部需要鉴权认证
-//                .anyRequest().authenticated()
+                .anyRequest().authenticated()
                 //authenticated()要求在执行该请求时，必须已经登录了应用
                 .and()
                 // CRSF禁用，因为不使用session
