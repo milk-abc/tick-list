@@ -244,7 +244,7 @@ export default {
   },
   methods: {
     async init () {
-      await Promise.all([this.getDayData(), this.getWeekData(), this.getCategoryData(), this.getStatistics(), this.getToday()])
+      await Promise.all([this.getDayData(), this.getWeekData(), this.getCategoryData(), this.getStatistics(), this.getToday()]).then(data => data).catch(error => alert(error));
       this.isloading = false;
     },
     getDayData () {

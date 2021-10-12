@@ -124,6 +124,15 @@ export default {
         this.$refs.password.focus()
       });
     },
+    debounce (fn, delay) {
+      let timer;
+      return function () {
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+          fn(...arguments);
+        }, delay);
+      };
+    },
     login (jseForm) {
       const _this = this;
       this.$axios.post('/login', jseForm).then(res => {
