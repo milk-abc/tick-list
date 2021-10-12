@@ -74,8 +74,8 @@ public class UserController {
         if (multipartFile == null){
             return RestResult.error("上传文件为空");
         }
-        cosService.putFile(id, multipartFile);
-        return RestResult.success();
+        RestResult result = cosService.putFile(id, multipartFile);
+        return result;
     }
 
     @ApiOperation("用户获取头像url")

@@ -15,6 +15,7 @@ import com.water76016.ourtask.entity.Task;
 import com.water76016.ourtask.entity.TaskLabel;
 import com.water76016.ourtask.service.TaskLabelService;
 import com.water76016.ourtask.service.TaskService;
+//import com.water76016.ourtask.websocket.WebSocket;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -38,6 +39,8 @@ public class TaskController {
     TaskService taskService;
     @Autowired
     TaskLabelService taskLabelService;
+//    @Autowired
+//    WebSocket webSocket;
 
     @ApiOperation("批量添加清单")
     @PostMapping("/addList")
@@ -62,6 +65,18 @@ public class TaskController {
             if (flag == false){
                 return RestResult.error();
             }
+            Integer taskId = task.getId();
+            //先删除之前的task和label对应关系
+            QueryWrapper<TaskLabel> taskLabelQueryWrapper = new QueryWrapper<>();
+            taskLabelQueryWrapper.eq("task_id", taskId);
+            taskLabelService.remove(taskLabelQueryWrapper);
+            //准备往task_label表里面插入新的task和label对应关系
+            List<Integer> labelList = taskParam.getLabelList();
+            for (Integer labelId : labelList){
+                TaskLabel taskLabel = TaskLabel.builder().taskId(taskId).labelId(labelId).build();
+                taskLabelService.save(taskLabel);
+            }
+//            webSocket.sendMessage("websocket消息：添加清单成功");
         }
         return RestResult.success();
     }
@@ -110,6 +125,10 @@ public class TaskController {
         }
         Task task = Task.builder().id(id).run(0).build();
         taskService.updateById(task);
+        //删除清单后，与此清单相关的清单-标签表，也要跟着一起删除
+        TaskLabel taskLabel = TaskLabel.builder().taskId(id).build();
+        QueryWrapper<TaskLabel> taskLabelQueryWrapper = new QueryWrapper<>(taskLabel);
+        taskLabelService.remove(taskLabelQueryWrapper);
         return RestResult.success();
     }
 
@@ -123,9 +142,6 @@ public class TaskController {
         queryWrapper.eq("user_id", userId);
         queryWrapper.eq("run", 1);
         List<Task> taskList = taskService.list(queryWrapper);
-        if (taskList == null || taskList.size() == 0){
-            return RestResult.noContentSuccess();
-        }
         List<TaskParam> taskParamList = new ArrayList<>();
         for (Task task : taskList){
             Integer taskId = task.getId();
@@ -157,9 +173,6 @@ public class TaskController {
         queryWrapper.eq("category_id", categoryId);
         queryWrapper.eq("run", 1);
         List<Task> taskList = taskService.list(queryWrapper);
-        if (taskList == null || taskList.size() == 0){
-            return RestResult.noContentSuccess();
-        }
         return RestResult.success(taskList);
     }
 
