@@ -125,6 +125,7 @@ export default {
       });
     },
     debounce (fn, delay) {
+      //加入防抖优化
       let timer;
       return function () {
         clearTimeout(timer);
