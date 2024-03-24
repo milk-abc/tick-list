@@ -1,3 +1,5 @@
+"use strict";
+const webpack = require("webpack");
 const path = require("path");
 module.exports = {
   entry: "./src/index.js",
@@ -20,4 +22,8 @@ module.exports = {
       },
     ],
   },
+  devServer: {
+    hot: true,
+  },
+  plugins: [new webpack.HotModuleReplacementPlugin()],
 };
