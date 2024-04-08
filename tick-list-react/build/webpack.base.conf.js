@@ -2,15 +2,13 @@
 const path = require("path");
 const utils = require("./utils");
 const config = require("../config");
-
 function resolve(dir) {
   return path.join(__dirname, "..", dir);
 }
-
 module.exports = {
   context: path.resolve(__dirname, "../"),
   entry: {
-    app: "./src/main.js",
+    app: "./src/index.js",
   },
   output: {
     path: config.build.assetsRoot,
@@ -21,9 +19,15 @@ module.exports = {
         : config.dev.assetsPublicPath,
   },
   resolve: {
-    extensions: [".js", ".json"],
+    extensions: [".wasm", ".ts", ".tsx", ".mjs", ".cjs", ".js", ".json"],
     alias: {
       "@": resolve("src"),
+    },
+  },
+  resolveLoader: {
+    modules: ["node_modules", path.resolve(__dirname, "loaders")],
+    alias: {
+      replaceLoader: path.resolve(__dirname, "loaders/replace-loader"),
     },
   },
   module: {
@@ -36,6 +40,10 @@ module.exports = {
           resolve("test"),
           resolve("node_modules/webpack-dev-server/client"),
         ],
+      },
+      {
+        test: /\.js$/,
+        loader: "replaceLoader",
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
