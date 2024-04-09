@@ -1,7 +1,7 @@
 const redis = require("redis");
 const client = redis.createClient({
-  host: "192.168.56.101", //	redis地址
-  port: 6379, // 端口号
+  host: "127.0.0.1", //	redis地址
+  port: 3000, // 端口号
 });
 // 监听连接事件
 client.on("connect", (error) => {

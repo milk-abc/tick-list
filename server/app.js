@@ -25,6 +25,19 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(
+  session({
+    secret: "WickYo", // 对cookie进行签名
+    name: "session", // cookie名称，默认为connect.sid
+    resave: false, // 强制将会话保存回会话容器
+    rolling: true, // 强制在每个response上设置会话标识符cookie
+    cookie: {
+      // 5分钟
+      maxAge: 30,
+    },
+  })
+);
+
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -50,18 +63,5 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render("error");
 });
-
-app.use(
-  session({
-    secret: "WickYo", // 对cookie进行签名
-    name: "session", // cookie名称，默认为connect.sid
-    resave: false, // 强制将会话保存回会话容器
-    rolling: true, // 强制在每个response上设置会话标识符cookie
-    cookie: {
-      // 5分钟
-      maxAge: 300000,
-    },
-  })
-);
 
 module.exports = app;
