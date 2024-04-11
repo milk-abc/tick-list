@@ -20,7 +20,6 @@ const verifyUsers = async (req, res, next) => {
 const handlePassword = async (req, res, next) => {
   const { password } = req.body;
   const initialPassword = decrypt(password, PRIVATE_KEY);
-  console.log("initialPassword", initialPassword);
   req.body.password = md5password(initialPassword);
   await next();
 };
