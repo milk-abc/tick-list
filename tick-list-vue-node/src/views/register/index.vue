@@ -97,7 +97,7 @@ export default {
       this.$refs[formName].validate(valid => {
         if (valid) {
           this.$axios.get('/getPublicKey').then(res => {
-            let jsePassword = encrypt(this.registerForm.password, res.data.msg);
+            let jsePassword = encrypt(this.registerForm.password, res.data.data);
             let jseForm = {
               username: this.registerForm.username,
               password: jsePassword
