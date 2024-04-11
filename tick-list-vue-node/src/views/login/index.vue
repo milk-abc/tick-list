@@ -128,21 +128,21 @@ export default {
     login (jseForm) {
       const _this = this;
       this.$axios.post('/login', jseForm).then(res => {
-        const jwt = res.headers['authorization']
-        const userInfo = res.data.user
-        console.log('userInfo', userInfo)
-        _this.$store.commit('SET_TOKEN', jwt)
-        _this.$store.commit("SET_USERINFO", userInfo)
+        const jwt = res.headers['authorization'];
+        const userInfo = res.data.user;
+        console.log('userInfo', userInfo);
+        _this.$store.commit('SET_TOKEN', jwt);
+        _this.$store.commit("SET_USERINFO", userInfo);
         // 登录之后，给axios统一设置头部token信息
-        this.$axios.defaults.headers.common['Authorization'] = localStorage.getItem('token')
-        _this.$router.push('/layout')
+        this.$axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
+        _this.$router.push('/layout');
       })
     },
     submitForm (formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
           this.$axios.get('/getPublicKey').then(res => {
-            let jsePassword = this.$encrypt(this.loginForm.password, res.data.msg);
+            let jsePassword = this.$encrypt(this.loginForm.password, res.data.data);
             let jseForm = Object.assign({}, this.loginForm, {
               password: jsePassword
             })

@@ -1,33 +1,34 @@
 const jwt = require("jsonwebtoken");
-const { PUBLIC_KEY } = require("../app/config");
+const { PUBLIC_KEY, PRIVATE_KEY } = require("../app/config");
 
 const errTypes = require("../constants/error-types");
-const service = require("../service/userService");
+const service = require("../service/user.service");
 const md5password = require("../utils/password-handle");
-const verifyLogin = async (ctx, next) => {
+const { decrypt } = require("../utils/jsencrypt");
+const verifyLogin = async (req, res, next) => {
   //1.获取用户名和密码
-  const { userName, password } = ctx.request.body;
+  const { username, password } = req.body;
 
   //2.判断用户名和密码是否为空
-  if (!userName || !password) {
+  if (!username || !password) {
     const error = new Error(errTypes.NAME_OR_PASSWORD_IS_REQUIRED);
-    return ctx.app.emit("error", error, ctx);
+    return next(error);
   }
   // 3.判断用户是否存在
-  const result = await service.getUserByName(userName);
+  const result = await service.getUserByName(username);
   const user = result[0];
   if (!user) {
     const error = new Error(errTypes.USER_DOES_NOT_EXISTS);
-    return ctx.app.emit("error", error, ctx);
+    return next(error);
   }
-
+  const initialPassword = decrypt(password, PRIVATE_KEY);
   // 4.判断密码是否和数据库中的密码是一致(加密)
-  if (md5password(password) !== user.password) {
+  if (md5password(initialPassword) !== user.password) {
     const error = new Error(errTypes.PASSWORD_IS_INCORRENT);
-    return ctx.app.emit("error", error, ctx);
+    return next(error);
   }
-  //将user信息放入ctx，一边后面的中间件处理
-  ctx.user = user;
+  //将user信息放入ctx，以便后面的中间件处理
+  req.user = user;
   await next();
 };
 
@@ -38,7 +39,7 @@ const verifyAuth = async (ctx, next) => {
 
   if (!authorization) {
     const error = new Error(errTypes.UNAUTHORIZATION);
-    return ctx.app.emit("error", error, ctx);
+    return next(error);
   }
   //因为是postman发送过来的，因此会多出Bearer这个字符
   const token = authorization.replace("Bearer ", "");
@@ -52,7 +53,7 @@ const verifyAuth = async (ctx, next) => {
     await next();
   } catch (error) {
     const err = new Error(errTypes.UNAUTHORIZATION);
-    return ctx.app.emit("error", err, ctx);
+    return next(error);
   }
 };
 

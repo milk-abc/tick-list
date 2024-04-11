@@ -5,7 +5,9 @@ const {
   verifyUsers,
   handlePassword,
 } = require("../middleware/user.middleware.js");
+const { verifyLogin, verifyAuth } = require("../middleware/auth.middleware.js");
 const UserController = require("../controller/user.controller.js");
+const AuthController = require("../controller/auth.controller.js");
 const { PUBLIC_KEY } = require("../app/config.js");
 var router = express.Router();
 
@@ -26,23 +28,18 @@ router.get("/getPublicKey", function (req, res, next) {
  * 如果正确的话，将token传给客户端
  */
 router.post("/register", [verifyUsers, handlePassword, UserController.create]);
-// /* GET home page. */
-router.get("/login", function (req, res, next) {
-  /**
-   * 用户登录
-   * 取出表单数据查询数据库中是否有该用户，密码是否正确
-   * 如果正确的话，将token传给客户端
-   */
-  res.render("index", { title: "Express" });
-});
+/**
+ * 用户登录
+ * 取出表单数据查询数据库中是否有该用户，密码是否正确
+ * 如果正确的话，将token传给客户端
+ */
+router.post("/login", [verifyLogin, AuthController.login]);
 
 router.get("/getSecurityCode", function (req, res, next) {
-  console.log("code");
   let code = captcha();
   setString(req.sessionID, code.text.toLowerCase(), 300);
   res.type("html"); //res.type('svg'); // 使用ejs等模板时报错
   res.status(200).send({ data: code.data, code: 200 });
-  res.end();
 });
 
 module.exports = router;

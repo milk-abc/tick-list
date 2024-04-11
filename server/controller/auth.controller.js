@@ -3,19 +3,20 @@ const jwt = require("jsonwebtoken");
 const authService = require("../service/auth.service");
 const { PRIVATE_KEY } = require("../app/config");
 class authController {
-  async login(ctx, next) {
-    const { id, userName } = ctx.user;
+  async login(req, res, next) {
+    const { id, username } = req.user;
 
-    const token = jwt.sign({ id, userName }, PRIVATE_KEY, {
+    const token = jwt.sign({ id, username }, PRIVATE_KEY, {
       //24h后失效
       expiresIn: 60 * 60 * 24,
       //非对称加密
       algorithm: "RS256",
     });
-    ctx.body = { id, userName, token };
+    res.setHeader("authorization", token);
+    res.status(200).send({ user: { username }, code: 200 });
   }
-  async success(ctx, next) {
-    ctx.body = "授权成功";
+  async success(req, res, next) {
+    res.body = "授权成功";
   }
 }
 
