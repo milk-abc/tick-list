@@ -1,0 +1,1 @@
+INSERT INTO `user`(`id`, `username`, `telephone`, `password`, `create_time`, `update_time`, `email`, `head_portrait`, `roles`, `status`) VALUES (23, 'admin', '131678945454', 'e10adc3949ba59abbe56e057f20f883e', NULL, NULL, '98714649544@qq.com', NULL, 'ROLE_USER', 1);
