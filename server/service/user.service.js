@@ -1,13 +1,13 @@
 const connect = require("../app/dataBase.js");
 class UserService {
   async create(user) {
-    const { userName, password } = user;
-    const statement = `insert into user (name,password) values (?,?)`;
-    const result = await connect.execute(statement, [userName, password]);
+    const { username, password } = user;
+    const statement = `insert into user (username,password) values (?,?);`;
+    const result = await connect.execute(statement, [username, password]);
     return result[0];
   }
   async getUserByName(userName) {
-    const statement = `SELECT * FROM user WHERE name = ?;`;
+    const statement = `SELECT * FROM user WHERE username = ?;`;
     const result = await connect.execute(statement, [userName]);
     return result[0];
   }

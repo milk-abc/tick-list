@@ -7,6 +7,7 @@ const {
 } = require("../middleware/user.middleware.js");
 const UserController = require("../controller/user.controller.js");
 const { PUBLIC_KEY } = require("../app/config.js");
+
 var router = express.Router();
 
 /**
@@ -21,9 +22,14 @@ router.get("/getPublicKey", function (req, res, next) {
    * 取出表单数据查询数据库中是否有该用户，密码是否正确
    * 如果正确的话，将token传给客户端
    */
-  console.log("hhhhhhh");
   res.status(200).send({ data: PUBLIC_KEY, code: 200 });
 });
+/**
+ * 用户登录
+ * 取出表单数据查询数据库中是否有该用户，密码是否正确
+ * 如果正确的话，将token传给客户端
+ */
+router.post("/register", [verifyUsers, handlePassword, UserController.create]);
 // /* GET home page. */
 router.get("/login", function (req, res, next) {
   /**
@@ -31,17 +37,9 @@ router.get("/login", function (req, res, next) {
    * 取出表单数据查询数据库中是否有该用户，密码是否正确
    * 如果正确的话，将token传给客户端
    */
-  console.log("hhhhhhhhhhhhhhhh");
   res.render("index", { title: "Express" });
 });
-// router.post("/register", function (req, res, next) {
-//   /**
-//    * 用户登录
-//    * 取出表单数据查询数据库中是否有该用户，密码是否正确
-//    * 如果正确的话，将token传给客户端
-//    */
-//   console.log("hhhhhhh");
-// });
+
 router.get("/getSecurityCode", function (req, res, next) {
   console.log("code");
   let code = captcha();

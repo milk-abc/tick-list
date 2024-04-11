@@ -16,7 +16,7 @@
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
     "mysql2": "^3.0.0",
-    "redis": "^4.0.6",
+    "redis": "^4.6.13",
     "svg-captcha": "^1.4.0"
   },
   "devDependencies": {}
