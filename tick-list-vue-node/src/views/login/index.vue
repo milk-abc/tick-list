@@ -129,6 +129,7 @@ export default {
       const _this = this;
       this.$axios.post('/login', jseForm).then(res => {
         const jwt = res.headers['authorization'];
+        console.log('jwt', jwt);
         const userInfo = res.data.user;
         console.log('userInfo', userInfo);
         _this.$store.commit('SET_TOKEN', jwt);

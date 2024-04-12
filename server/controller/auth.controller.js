@@ -13,7 +13,8 @@ class authController {
       algorithm: "RS256",
     });
     res.setHeader("authorization", token);
-    res.status(200).send({ user: { username }, code: 200 });
+    res.status(200).send({ user: { id, username }, code: 200 });
+    console.log("res", res);
   }
   async success(req, res, next) {
     res.body = "授权成功";

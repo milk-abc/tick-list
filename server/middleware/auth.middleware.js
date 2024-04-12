@@ -32,10 +32,10 @@ const verifyLogin = async (req, res, next) => {
   await next();
 };
 
-const verifyAuth = async (ctx, next) => {
+const verifyAuth = async (req,res, next) => {
   console.log("验证登陆的授权");
   //获取token
-  const authorization = ctx.headers.authorization;
+  const authorization = req.headers.authorization;
 
   if (!authorization) {
     const error = new Error(errTypes.UNAUTHORIZATION);
@@ -49,7 +49,7 @@ const verifyAuth = async (ctx, next) => {
     const result = jwt.verify(token, PUBLIC_KEY, {
       algorithms: ["RS256"],
     });
-    ctx.user = result;
+    req.user = result;
     await next();
   } catch (error) {
     const err = new Error(errTypes.UNAUTHORIZATION);
