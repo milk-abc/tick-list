@@ -8,12 +8,7 @@ const {
 const { verifyLogin, verifyAuth } = require("../middleware/auth.middleware.js");
 const UserController = require("../controller/user.controller.js");
 const AuthController = require("../controller/auth.controller.js");
-const {
-  getData,
-  addCategoryData,
-  getCategoryPageListData,
-} = require("../service/category.service");
-const { getLabelPageListData } = require("../service/label.service.js");
+
 const { PUBLIC_KEY } = require("../app/config.js");
 var router = express.Router();
 
@@ -47,76 +42,5 @@ router.get("/getSecurityCode", function (req, res, next) {
   res.type("html"); //res.type('svg'); // 使用ejs等模板时报错
   res.status(200).send({ data: code.data, code: 200 });
 });
-
-router.post("/category/add", async function (req, res, next) {
-  /**
-   * 添加分类后需要刷新分类表，重新get请求返回最新的分类表
-   */
-  const { userId, name } = req.body;
-  const result = await addCategoryData(userId, name);
-  res.status(200).send({
-    msg: "操作成功",
-    code: 200,
-    data: {
-      id: Symbol(name),
-      name: name,
-      taskCount: 0,
-    },
-  });
-});
-
-router.get("/category/get", async function (req, res, next) {
-  /**
-   * 获取分类表
-   */
-  const { userId } = req.query;
-  const result = await getData(userId);
-  res.status(200).send({
-    msg: "操作成功",
-    code: 200,
-    data: result,
-  });
-});
-
-router.get(
-  "/category/getPageList/:userId/:pageCurrent/:pageSize",
-  async function (req, res, next) {
-    const { userId, pageCurrent, pageSize } = req.params;
-    const result = await getCategoryPageListData(userId, pageCurrent, pageSize);
-    console.log("result", result);
-    const { records, total } = result;
-    res.status(200).send({
-      msg: "操作成功",
-      code: 200,
-      data: {
-        records,
-        total,
-        size: Number(pageSize),
-        current: Number(pageCurrent),
-        pages: Math.ceil(total / Number(pageSize)),
-      },
-    });
-  }
-);
-
-router.get(
-  "/label/getPageList/:userId/:pageCurrent/:pageSize",
-  async function (req, res, next) {
-    const { userId, pageCurrent, pageSize } = req.params;
-    const result = await getLabelPageListData(userId, pageCurrent, pageSize);
-    console.log("result", result);
-    res.status(200).send({
-      msg: "操作成功",
-      code: 200,
-      data: {
-        records: [...result],
-        total: result.length,
-        size: Number(pageSize),
-        current: Number(pageCurrent),
-        pages: Math.floor(result.length / Number(pageSize)),
-      },
-    });
-  }
-);
 
 module.exports = router;
