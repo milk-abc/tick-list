@@ -72,8 +72,8 @@ export default {
       tid: 0,
       taskParam: {
         id: 0,
-        userId: this.$store.state.userInfo.id,
-        categoryId: null,
+        user_id: this.$store.state.userInfo.id,
+        category_id: null,
         name: '',
         labelList: [],
         description: ''

@@ -79,4 +79,6 @@ function cn_tomorrow() {
 module.exports = {
   en_tomorrow,
   en_today,
+  days_ago,
+  en_format,
 };
