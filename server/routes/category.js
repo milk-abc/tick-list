@@ -1,7 +1,11 @@
 var express = require("express");
 
 var router = express.Router();
-const { getData, addCategoryData } = require("../service/category.service");
+const {
+  getData,
+  addCategoryData,
+  getPageListData,
+} = require("../service/category.service");
 
 /* GET users listing. */
 // router.get("/listAll/:userId", async function (req, res, next) {
@@ -22,5 +26,14 @@ router.post("/add", async function (req, res, next) {
     res.status(200).send({ msg: "操作成功", code: 200 });
   }
 });
+
+router.get(
+  "/getPageList/:userId/:pageCurrent/:pageSize",
+  async function (req, res, next) {
+    const { userId, pageCurrent, pageSize } = req.body;
+    const result = await getPageListData(userId, pageCurrent, pageSize);
+    res.status(200).send({ msg: "操作成功", code: 200 });
+  }
+);
 
 module.exports = router;

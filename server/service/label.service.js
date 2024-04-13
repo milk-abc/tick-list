@@ -1,7 +1,7 @@
 const connect = require("../app/dataBase.js");
 const moment = require("moment");
 const { en_tomorrow, en_today } = require("../utils/formatDate.js");
-class CategoryService {
+class LabelService {
   async create(user) {
     const { username, password } = user;
     const statement = `insert into user (username,password) values (?,?);`;
@@ -34,27 +34,20 @@ class CategoryService {
     const result = await connect.execute(statement, [userId, name]);
     console.log(result);
   }
-  async getCategoryPageListData(userId, pageCurrent, pageSize) {
-    const statement = `SELECT ca.id, ca.name, count(ta.id) as 'taskCount'
-    FROM category ca inner join task ta on ca.id = ta.category_id 
-    WHERE (ca.user_id = ?)
-    group by ca.id, ca.name LIMIT ?,?;`;
+  async getLabelPageListData(userId, pageCurrent, pageSize) {
+    const statement = `select la.id, la.name, count(la.id) as 'taskCount'
+    from label la inner join task ta on la.id = ta.category_id 
+    where (la.user_id = ?)
+    group by la.id, la.name LIMIT ?,?;`;
     const startOrder = (pageCurrent - 1) * pageSize;
     //分页接收的是字符串类型
-    const dataResult = await connect.execute(statement, [
+    const result = await connect.execute(statement, [
       userId,
       `${startOrder}`,
       pageSize,
     ]);
-    const statement2 = `SELECT count(ca.id) as 'total'
-    FROM category ca WHERE (ca.user_id = ?);`;
-    const totalResult = await connect.execute(statement2, [userId]);
-    const result = Object.assign(
-      {},
-      { records: dataResult[0] },
-      totalResult[0][0]
-    );
-    return result;
+    return result[0];
   }
+	
 }
-module.exports = new CategoryService();
+module.exports = new LabelService();
