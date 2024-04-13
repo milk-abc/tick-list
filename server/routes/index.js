@@ -8,6 +8,7 @@ const {
 const { verifyLogin, verifyAuth } = require("../middleware/auth.middleware.js");
 const UserController = require("../controller/user.controller.js");
 const AuthController = require("../controller/auth.controller.js");
+const { getData, addCategoryData } = require("../service/category.service");
 const { PUBLIC_KEY } = require("../app/config.js");
 var router = express.Router();
 
@@ -40,6 +41,23 @@ router.get("/getSecurityCode", function (req, res, next) {
   setString(req.sessionID, code.text.toLowerCase(), 300);
   res.type("html"); //res.type('svg'); // 使用ejs等模板时报错
   res.status(200).send({ data: code.data, code: 200 });
+});
+
+router.post("/category/add", async function (req, res, next) {
+  /**
+   * 添加分类后需要刷新分类表，重新get请求返回最新的分类表
+   */
+  const { userId, name } = req.body;
+  const result = await addCategoryData(userId, name);
+  res.status(200).send({
+    msg: "操作成功",
+    code: 200,
+    data: {
+      id: Symbol(name),
+      name: name,
+      taskCount: 0,
+    },
+  });
 });
 
 module.exports = router;
