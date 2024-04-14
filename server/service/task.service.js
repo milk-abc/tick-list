@@ -50,41 +50,50 @@ class TaskService {
     return result;
   }
   async getWeekData(userId) {
-    const time = 30;
-    const statement = `select DATE_FORMAT(update_time,'%Y-%m-%d') days,count(id) count from task 
-    where update_time > DATE_SUB(CURDATE(),INTERVAL 30 Day)
-    and user_id = ? and run = 0
-    group by days;`;
-    const totalStatement = `select DATE_FORMAT(update_time,'%Y-%m-%d') days,count(id) count from task 
-    where update_time > DATE_SUB(CURDATE(),INTERVAL 30 Day)
-    and user_id = ? group by days;`;
+    const time = 7;
     const data = [];
-    for (let i = 0; i < time; i++) {
-      data.unshift(en_format(days_ago(i)));
+    //获取本周一的日期
+    const now = new Date();
+    const day = now.getDay();
+    let monday;
+    if (day === 0) {
+      //如果是周日
+      monday = days_ago(6);
+    } else if (day === 1) {
+      monday = days_ago(0);
+    } else {
+      monday = days_ago(day - 1);
     }
-    const midResult = await connect.execute(statement, [userId]);
-    const totalResult = await connect.execute(totalStatement, [userId]);
-    const result = [];
-    for (let i = 0; i < time; i++) {
-      result.push({ date: data[i], day: 0, total: 0 });
+    const toDay = en_format(days_ago(-1));
+    const latestStatement = `select count(id) count from task 
+      where update_time >= ? and update_time < ?
+      and user_id = ? and run = 0;`;
+    const latestResult = await connect.execute(latestStatement, [
+      en_format(monday),
+      toDay,
+      userId,
+    ]);
+    data.unshift({
+      date: en_format(days_ago(0)),
+      week: latestResult[0][0].count || 0,
+    });
+    for (let i = 0; i < time - 1; i++) {
+      const curDay = en_format(days_ago(i * 7, monday));
+      const weekAgo = en_format(days_ago((i + 1) * 7, monday));
+      const statement = `select count(id) count from task 
+      where update_time >= ? and update_time < ?
+      and user_id = ? and run = 0;`;
+      const midResult = await connect.execute(statement, [
+        weekAgo,
+        curDay,
+        userId,
+      ]);
+      data.unshift({
+        date: en_format(days_ago(i * 7, monday)),
+        week: midResult[0][0].count || 0,
+      });
     }
-    for (let i = 0; i < time; i++) {
-      for (const item of midResult[0]) {
-        if (item.days == data[i]) {
-          result[i]["day"] = item.count;
-        }
-      }
-    }
-    for (let i = 0; i < time; i++) {
-      for (const item of totalResult[0]) {
-        if (item.days == data[i]) {
-          result[i]["total"] = item.count;
-        }
-      }
-    }
-
-    console.log("hhhh", data, result);
-    return result;
+    return data;
   }
   async saveTaskData({
     id,
