@@ -6,6 +6,8 @@ const {
   getLabelPageListData,
   getListAllData,
   addLabel,
+  updateLabel,
+  deleteLabel,
 } = require("../service/label.service.js");
 /**
  * 获取当前分页的标签
@@ -63,12 +65,36 @@ router.post("/add", async function (req, res, next) {
   }
 });
 /**
- * 更新分类
+ * 更新标签
  */
-router.post("/update", async function (req, res, next) {});
+router.post("/update", async function (req, res, next) {
+  if (req.method === "OPTIONS") {
+    res.status(200).send({ msg: "操作成功", code: 200 });
+  } else {
+    const { id, name } = req.body;
+    const result = await updateLabel(id, name);
+    res.status(200).send({
+      msg: "操作成功",
+      code: 200,
+      data: {
+        id,
+      },
+    });
+  }
+});
 
 /**
- * 删除分类
+ * 删除标签
  */
-router.get("/delete/:labelId/:userId", async function (req, res, next) {});
+router.get("/delete/:labelId", async function (req, res, next) {
+  const { labelId } = req.params;
+  const result = await deleteLabel(labelId);
+  res.status(200).send({
+    msg: "操作成功",
+    code: 200,
+    data: {
+      id: labelId,
+    },
+  });
+});
 module.exports = router;

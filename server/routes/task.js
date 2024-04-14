@@ -67,14 +67,12 @@ router.post(
   "/getPageList/:userId/:pageCurrent/:pageSize",
   async function (req, res, next) {
     const { userId, pageCurrent, pageSize } = req.params;
-
     const result = await getTaskPageListData(
       userId,
       pageCurrent,
       pageSize,
       req.body
     );
-    console.log("result", result);
     const { records, total } = result;
     res.status(200).send({
       msg: "操作成功",

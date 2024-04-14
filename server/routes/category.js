@@ -6,6 +6,8 @@ const {
   getListAllData,
   addCategoryData,
   getCategoryPageListData,
+  updateCategory,
+  deleteCategory,
 } = require("../service/category.service");
 
 /**
@@ -35,12 +37,36 @@ router.post("/add", async function (req, res, next) {
 /**
  * 更新分类
  */
-router.post("/update", async function (req, res, next) {});
+router.post("/update", async function (req, res, next) {
+  if (req.method === "OPTIONS") {
+    res.status(200).send({ msg: "操作成功", code: 200 });
+  } else {
+    const { id, name, userId } = req.body;
+    const result = await updateCategory(id, name, userId);
+    res.status(200).send({
+      msg: "操作成功",
+      code: 200,
+      data: {
+        id,
+      },
+    });
+  }
+});
 
 /**
  * 删除分类
  */
-router.get("/delete/:categoryId/:userId", async function (req, res, next) {});
+router.get("/delete/:categoryId/:userId", async function (req, res, next) {
+  const { categoryId, userId } = req.params;
+  const result = await deleteCategory(categoryId, userId);
+  res.status(200).send({
+    msg: "操作成功",
+    code: 200,
+    data: {
+      id: categoryId,
+    },
+  });
+});
 
 /**
  * 获取当前分页的分类

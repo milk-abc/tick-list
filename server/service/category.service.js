@@ -37,6 +37,14 @@ class CategoryService {
     const result = await connect.execute(statement, [userId]);
     return result[0];
   }
+  async deleteCategory(categoryId, userId) {
+    const statement = `delete from category where id = ?;`;
+    await connect.execute(statement, [categoryId]);
+  }
+  async updateCategory(categoryId, name, userId) {
+    const statement = `update category set name = ? where id = ?;`;
+    await connect.execute(statement, [name, categoryId]);
+  }
 }
 
 module.exports = new CategoryService();

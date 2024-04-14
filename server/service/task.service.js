@@ -120,26 +120,31 @@ class TaskService {
         id,
       ]);
       await connect.execute(deleteStatement, [id]);
-    }
-    const insertTaskStatement = `INSERT INTO task ( user_id, category_id, name, description, create_time, update_time, run ) VALUES ( ?, ?, ?, ?, NOW(), NOW(), 1 ); `;
-    await connect.execute(insertTaskStatement, [
-      user_id,
-      category_id,
-      name,
-      description,
-    ]);
-    const taskIdResult = await connect.execute(
-      `SELECT LAST_INSERT_ID() as taskId;`
-    );
-    for (let item of labelList) {
-      /**
-       * 怎么获取task_id
-       */
-      const insertRelationStatement = `INSERT INTO task_label (task_id, label_id, create_time, update_time) VALUES (?, ?, NOW(), NOW() );`;
-      await connect.execute(insertRelationStatement, [
-        taskIdResult[0][0].taskId,
-        item,
+      for (let item of labelList) {
+        const insertRelationStatement = `INSERT INTO task_label (task_id, label_id, create_time, update_time) VALUES (?, ?, NOW(), NOW() );`;
+        await connect.execute(insertRelationStatement, [id, item]);
+      }
+    } else {
+      const insertTaskStatement = `INSERT INTO task ( user_id, category_id, name, description, create_time, update_time, run ) VALUES ( ?, ?, ?, ?, NOW(), NOW(), 1 ); `;
+      await connect.execute(insertTaskStatement, [
+        user_id,
+        category_id,
+        name,
+        description,
       ]);
+      const taskIdResult = await connect.execute(
+        `SELECT LAST_INSERT_ID() as taskId;`
+      );
+      for (let item of labelList) {
+        /**
+         * 怎么获取task_id
+         */
+        const insertRelationStatement = `INSERT INTO task_label (task_id, label_id, create_time, update_time) VALUES (?, ?, NOW(), NOW() );`;
+        await connect.execute(insertRelationStatement, [
+          taskIdResult[0][0].taskId,
+          item,
+        ]);
+      }
     }
   }
   async finishTaskData(taskId) {

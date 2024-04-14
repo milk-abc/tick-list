@@ -28,5 +28,15 @@ class LabelService {
     );
     return labelIdResult[0][0].labelId;
   }
+  async deleteLabel(labelId) {
+    const statement = `delete from label where id = ?;`;
+    const taskLabelStatement = `delete from task_label where label_id = ?;`;
+    await connect.execute(statement, [labelId]);
+    await connect.execute(taskLabelStatement, [labelId]);
+  }
+  async updateLabel(labelId, name) {
+    const statement = `update label set name = ? where id = ?;`;
+    await connect.execute(statement, [name, labelId]);
+  }
 }
 module.exports = new LabelService();
