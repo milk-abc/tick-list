@@ -8,6 +8,8 @@ const {
   finishTaskData,
   getTaskPageListData,
   countTodayFinishCategory,
+  countCategoryAndLabelForDay,
+  getStatistics,
 } = require("../service/task.service");
 
 /* GET users listing. */
@@ -42,6 +44,23 @@ router.get("/countTodayForCategory/:userId", async function (req, res, next) {
   const { userId } = req.params;
   const result = await countTodayFinishCategory(userId);
   res.status(200).send({ msg: "操作成功", code: 200, data: [...result] });
+});
+
+router.get(
+  "/statistics/countCategoryAndLabelForDay/:userId",
+  async function (req, res, next) {
+    const { userId } = req.params;
+    const result = await countCategoryAndLabelForDay(userId);
+    console.log("result", result);
+    res.status(200).send({ msg: "操作成功", code: 200, data: [...result] });
+  }
+);
+
+router.get("/getStatistics/:userId", async function (req, res, next) {
+  const { userId } = req.params;
+  const result = await getStatistics(userId);
+  console.log("result", result);
+  res.status(200).send({ msg: "操作成功", code: 200, data: result });
 });
 
 router.post(

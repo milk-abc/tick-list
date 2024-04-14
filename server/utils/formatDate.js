@@ -24,6 +24,19 @@ Date.prototype.format = function (fmt) {
   }
   return fmt;
 };
+//获取上个月最后一天
+function getLastMonthDate(nowDays) {
+  var year = nowDays.getFullYear();
+  var month = nowDays.getMonth();
+  if (month == 0) {
+    month = 12;
+    year = year - 1;
+  }
+  if (month < 10) {
+    month = "0" + month;
+  }
+  return new Date(year, month, 0);
+}
 //N天时间戳，时间戳指从1970-01-01 0点开始到某天的毫秒数
 function timestamp(days) {
   return days * 24 * 60 * 60 * 1000;
@@ -44,9 +57,6 @@ function today() {
 // }
 // function tomorrow() {
 //   return days_ago(-1);
-// }
-// function today() {
-//   return new Date();
 // }
 ///字符串格式化的日期，英文常用，如2021-01-01
 function en_format(func) {
@@ -81,4 +91,5 @@ module.exports = {
   en_today,
   days_ago,
   en_format,
+  getLastMonthDate,
 };

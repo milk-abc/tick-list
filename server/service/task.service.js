@@ -5,6 +5,7 @@ const {
   en_today,
   days_ago,
   en_format,
+  getLastMonthDate,
 } = require("../utils/formatDate.js");
 class TaskService {
   async create(user) {
@@ -13,6 +14,11 @@ class TaskService {
     const result = await connect.execute(statement, [username, password]);
     return result[0];
   }
+  /**
+   * 计算一周内每日完成的清单和创建的清单的数量
+   * @param {*} userId
+   * @returns
+   */
   async getDayData(userId) {
     const statement = `select DATE_FORMAT(update_time,'%Y-%m-%d') days,count(id) count from task 
     where update_time > DATE_SUB(CURDATE(),INTERVAL 7 Day)
@@ -189,6 +195,82 @@ class TaskService {
     group by ca.name ;`;
     const result = await connect.execute(statement, [userId]);
     return result[0];
+  }
+  async countCategoryAndLabelForDay(userId) {
+    const categoryStatement = `select DATE_FORMAT(update_time,'%Y-%m-%d') days,count(id) count from category 
+    where update_time > DATE_SUB(CURDATE(),INTERVAL 7 Day)
+    and user_id = ? group by days;`;
+    const labelStatement = `select DATE_FORMAT(update_time,'%Y-%m-%d') days,count(id) count from label 
+    where update_time > DATE_SUB(CURDATE(),INTERVAL 7 Day)
+    and user_id = ? group by days;`;
+    const data = [];
+    for (let i = 0; i < 7; i++) {
+      data.unshift(en_format(days_ago(i)));
+    }
+    const categoryResult = await connect.execute(categoryStatement, [userId]);
+    const labelResult = await connect.execute(labelStatement, [userId]);
+    const result = [];
+    for (let i = 0; i < 7; i++) {
+      result.push({ date: data[i], categoryDay: 0, labelDay: 0 });
+    }
+    for (let i = 0; i < 7; i++) {
+      for (const item of categoryResult[0]) {
+        if (item.days == data[i]) {
+          result[i]["categoryDay"] = item.count;
+        }
+      }
+    }
+    for (let i = 0; i < 7; i++) {
+      for (const item of labelResult[0]) {
+        if (item.days == data[i]) {
+          result[i]["labelDay"] = item.count;
+        }
+      }
+    }
+
+    return result;
+  }
+  async getStatistics(userId) {
+    const statement = `select run, count(*) as count from task 
+    where user_id = ?
+    group by run;`;
+    const rangeStatement = `select count(*) as count
+    from task 
+    where update_time >= ? and update_time < ? 
+    and user_id = ? and run = 0`;
+    const result = await connect.execute(statement, [userId]);
+    const now = new Date();
+    const day = now.getDay();
+    //计算本周一
+    let monday, lastMonth;
+    if (day === 0) {
+      //如果是周日
+      monday = days_ago(6);
+    } else if (day === 1) {
+      monday = days_ago(0);
+    } else {
+      monday = days_ago(day - 1);
+    }
+    //计算上月底
+    lastMonth = getLastMonthDate(now);
+    const weekAgo = en_format(days_ago(7, monday));
+    const mouthAgo = en_format(days_ago(30, lastMonth));
+    const weekData = await connect.execute(rangeStatement, [
+      weekAgo,
+      monday,
+      userId,
+    ]);
+    const monthData = await connect.execute(rangeStatement, [
+      mouthAgo,
+      lastMonth,
+      userId,
+    ]);
+    return {
+      totalFinished: result[0][0].count,
+      unFinished: result[0][1].count,
+      weekFinished: weekData[0][0].count,
+      monthFinished: monthData[0][0].count,
+    };
   }
 }
 module.exports = new TaskService();

@@ -258,7 +258,7 @@ export default {
       })
     },
     getCategoryData () {//修改接口名，获得上周创建标签分类的数据
-      this.$axios.get(`/statistics/countCategoryAndLabelForDay/${this.$store.state.userInfo.id}`).then((res) => {
+      this.$axios.get(`task/statistics/countCategoryAndLabelForDay/${this.$store.state.userInfo.id}`).then((res) => {
         this.dayCategoryData.rows = res.data.data
       })
     },
