@@ -54,3 +54,8 @@ tick-list项目是一个清单管理系统，包括前台系统使用及后台�
 |   Axios    |    前端HTTP框架    |            https://github.com/axios/axios             |
 |  v-charts  |    前端图表生成    |              https://v-charts.js.org/#/               |
 |  Iconfont  | 阿里巴巴矢量图标库 |               https://www.iconfont.cn/                |
+
+### 开发
+期待有相同爱好小伙伴一起加入开发
+前端微信讨论群
+![e1b01d1cea0c322f500f342710aac6f](https://github.com/milk-abc/tick-list/assets/52402596/45dab2a4-4875-4dd9-8888-27efecdbeb9d)
