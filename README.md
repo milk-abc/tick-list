@@ -58,4 +58,5 @@ tick-list项目是一个清单管理系统，包括前台系统使用及后台�
 ### 开发
 期待有相同爱好小伙伴一起加入开发
 前端微信讨论群
-![e1b01d1cea0c322f500f342710aac6f](https://github.com/milk-abc/tick-list/assets/52402596/45dab2a4-4875-4dd9-8888-27efecdbeb9d)
+![e1b01d1cea0c322f500f342710aac6f](https://github.com/milk-abc/tick-list/assets/52402596/382b81f8-3ebd-4404-b00e-fb0608eae8a8)
+
