@@ -72,9 +72,10 @@ import { onMounted, reactive, ref, nextTick } from 'vue'
 import service from '@/axios'
 import router from '@/router'
 import { useStore } from 'vuex'
+import _store from '@/store'
 import { ElMessage } from 'element-plus'
 import { encrypt, decrypt } from '@/utils/jsencrypt'
-const store = useStore()
+const store = useStore() || _store
 const imgRef = ref(null)
 const imgSrc = ref('')
 const password = ref(null)

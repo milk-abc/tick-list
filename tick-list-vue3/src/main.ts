@@ -8,6 +8,7 @@ import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 import '@/styles/index.scss' // global css
+
 import VCharts from 'v-charts'
 import Antd from 'ant-design-vue'
 const app = createApp(App)
